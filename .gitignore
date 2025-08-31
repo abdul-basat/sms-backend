@@ -1,0 +1,62 @@
+# Node.js
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Dependency directories
+node_modules/
+
+# Build output
+coverage/
+dist/
+build/
+
+# Environment files
+.env
+.env.*
+
+# Docker
+*.pid
+docker/*.env
+docker-compose.yml
+Dockerfile
+
+# Misc
+*.swp
+*.swo
+*.bak
+*.tmp
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Test output
+*.lcov
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.backup
+
+# Others
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+
+# Ignore coverage reports
+coverage/
+
+# Ignore test folders
+tests/helpers/
+tests/unit/
