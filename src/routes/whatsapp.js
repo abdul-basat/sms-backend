@@ -86,4 +86,54 @@ router.get('/sessions', requirePermission('read:whatsapp'), asyncHandler(async (
   const status = await whatsappController.getConnectionStatus(req, res);
 }));
 
+// Queue Management Endpoints
+
+// Get queue status
+router.get('/queue/status/:organizationId?', 
+  requirePermission('read:whatsapp'), 
+  asyncHandler(whatsappController.getQueueStatus.bind(whatsappController))
+);
+
+// Pause queue processing
+router.post('/queue/pause/:organizationId?', 
+  requirePermission('write:whatsapp'), 
+  asyncHandler(whatsappController.pauseQueue.bind(whatsappController))
+);
+
+// Resume queue processing
+router.post('/queue/resume/:organizationId?', 
+  requirePermission('write:whatsapp'), 
+  asyncHandler(whatsappController.resumeQueue.bind(whatsappController))
+);
+
+// Clear all messages from queue
+router.delete('/queue/clear/:organizationId?', 
+  requirePermission('write:whatsapp'), 
+  asyncHandler(whatsappController.clearQueue.bind(whatsappController))
+);
+
+// Cancel specific message
+router.delete('/queue/message/:messageId', 
+  requirePermission('write:whatsapp'), 
+  asyncHandler(whatsappController.cancelMessage.bind(whatsappController))
+);
+
+// Retry failed message
+router.post('/queue/retry/:messageId', 
+  requirePermission('write:whatsapp'), 
+  asyncHandler(whatsappController.retryMessage.bind(whatsappController))
+);
+
+// Get queued messages
+router.get('/queue/messages/:organizationId?', 
+  requirePermission('read:whatsapp'), 
+  asyncHandler(whatsappController.getQueuedMessages.bind(whatsappController))
+);
+
+// Get duplicate prevention statistics
+router.get('/queue/duplicates/:organizationId?', 
+  requirePermission('read:whatsapp'), 
+  asyncHandler(whatsappController.getDuplicateStats.bind(whatsappController))
+);
+
 module.exports = router;

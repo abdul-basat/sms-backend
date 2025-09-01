@@ -130,31 +130,66 @@ class AutomationScheduler {
    * Schedule attendance notification checks
    */
   scheduleAttendanceNotifications() {
-    console.log('📚 Scheduling attendance notification checks (every 15 minutes during school hours)...');
+    console.log('📚 Scheduling attendance notification checks...');
 
-    const job = cron.schedule('*/15 * * * *', async () => {
+    // Daily attendance notifications (every 15 minutes during school hours)
+    const dailyJob = cron.schedule('*/15 * * * *', async () => {
       try {
         // Only run during typical school hours (8 AM to 6 PM)
         const now = new Date();
         const hour = now.getHours();
         
         if (hour >= 8 && hour <= 18) {
-          console.log('🎓 Running automated attendance notification check...');
-          const result = await this.attendanceNotificationsService.checkAndProcessAttendanceNotifications();
-          console.log(`📊 Attendance notifications completed: ${result.totalNotifications} notifications sent to ${result.totalOrganizations} organizations`);
+          console.log('🎓 Running automated daily attendance notification check...');
+          const result = await this.attendanceNotificationsService.checkAndSendDailyAttendanceNotifications();
+          console.log(`📊 Daily attendance notifications completed: ${result.totalNotifications} notifications sent to ${result.totalOrganizations} organizations`);
         } else {
-          console.log('🌙 Outside school hours, skipping attendance notifications');
+          console.log('🌙 Outside school hours, skipping daily attendance notifications');
         }
       } catch (error) {
-        console.error('❌ Attendance notification check failed:', error.message);
+        console.error('❌ Daily attendance notification check failed:', error.message);
       }
     }, {
       scheduled: true,
       timezone: process.env.TZ || 'Asia/Karachi'
     });
 
-    this.cronJobs.push(job);
-    console.log('✅ Attendance notification checks scheduled');
+    // Weekly attendance reports (Sundays at 8 PM)
+    const weeklyJob = cron.schedule('0 20 * * 0', async () => {
+      try {
+        console.log('📝 Running weekly attendance report generation...');
+        const result = await this.attendanceNotificationsService.generateWeeklyAttendanceReports();
+        console.log(`📋 Weekly attendance reports completed: ${result.totalReports} reports sent`);
+      } catch (error) {
+        console.error('❌ Weekly attendance report generation failed:', error.message);
+      }
+    }, {
+      scheduled: true,
+      timezone: process.env.TZ || 'Asia/Karachi'
+    });
+
+    // Monthly attendance reports (Last day of month at 7 PM)
+    const monthlyJob = cron.schedule('0 19 28-31 * *', async () => {
+      try {
+        // Check if tomorrow is the first day of next month
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        
+        if (tomorrow.getDate() === 1) {
+          console.log('📊 Running monthly attendance report generation...');
+          const result = await this.attendanceNotificationsService.generateMonthlyAttendanceReports();
+          console.log(`📈 Monthly attendance reports completed: ${result.totalReports} reports sent`);
+        }
+      } catch (error) {
+        console.error('❌ Monthly attendance report generation failed:', error.message);
+      }
+    }, {
+      scheduled: true,
+      timezone: process.env.TZ || 'Asia/Karachi'
+    });
+
+    this.cronJobs.push(dailyJob, weeklyJob, monthlyJob);
+    console.log('✅ Attendance notifications scheduled - Daily (every 15 min), Weekly (Sun 8PM), Monthly (last day 7PM)');
   }
 
   /**

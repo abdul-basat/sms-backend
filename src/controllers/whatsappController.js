@@ -4,12 +4,14 @@
  */
 
 const WhatsAppService = require('../services/whatsappService');
+const EnhancedMessageQueueService = require('../services/enhancedMessageQueueService');
 const { validationResult } = require('express-validator');
 const logger = require('../utils/logger');
 
 class WhatsAppController {
   constructor() {
     this.whatsappService = new WhatsAppService();
+    this.queueService = new EnhancedMessageQueueService();
   }
 
   /**
@@ -402,6 +404,305 @@ class WhatsAppController {
 
     } catch (error) {
       logger.error('[WhatsAppController] Update configuration failed:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Internal server error',
+        error: error.message
+      });
+    }
+  }
+
+  // Queue Management Methods
+
+  /**
+   * Get queue status for organization
+   */
+  async getQueueStatus(req, res) {
+    try {
+      const organizationId = req.params.organizationId || req.user?.organizationId;
+      
+      if (!organizationId) {
+        return res.status(400).json({
+          success: false,
+          message: 'Organization ID required'
+        });
+      }
+
+      const queueStatus = await this.queueService.getQueueStatus(organizationId);
+
+      res.json({
+        success: true,
+        data: queueStatus
+      });
+
+    } catch (error) {
+      logger.error('[WhatsAppController] Get queue status failed:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Internal server error',
+        error: error.message
+      });
+    }
+  }
+
+  /**
+   * Pause queue processing
+   */
+  async pauseQueue(req, res) {
+    try {
+      const organizationId = req.params.organizationId || req.user?.organizationId;
+      
+      if (!organizationId) {
+        return res.status(400).json({
+          success: false,
+          message: 'Organization ID required'
+        });
+      }
+
+      const result = await this.queueService.pauseQueue(organizationId);
+
+      if (result.success) {
+        res.json({
+          success: true,
+          message: 'Queue paused successfully',
+          data: result
+        });
+      } else {
+        res.status(400).json({
+          success: false,
+          message: result.message || 'Failed to pause queue',
+          error: result.error
+        });
+      }
+
+    } catch (error) {
+      logger.error('[WhatsAppController] Pause queue failed:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Internal server error',
+        error: error.message
+      });
+    }
+  }
+
+  /**
+   * Resume queue processing
+   */
+  async resumeQueue(req, res) {
+    try {
+      const organizationId = req.params.organizationId || req.user?.organizationId;
+      
+      if (!organizationId) {
+        return res.status(400).json({
+          success: false,
+          message: 'Organization ID required'
+        });
+      }
+
+      const result = await this.queueService.resumeQueue(organizationId);
+
+      if (result.success) {
+        res.json({
+          success: true,
+          message: 'Queue resumed successfully',
+          data: result
+        });
+      } else {
+        res.status(400).json({
+          success: false,
+          message: result.message || 'Failed to resume queue',
+          error: result.error
+        });
+      }
+
+    } catch (error) {
+      logger.error('[WhatsAppController] Resume queue failed:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Internal server error',
+        error: error.message
+      });
+    }
+  }
+
+  /**
+   * Clear all messages from queue
+   */
+  async clearQueue(req, res) {
+    try {
+      const organizationId = req.params.organizationId || req.user?.organizationId;
+      
+      if (!organizationId) {
+        return res.status(400).json({
+          success: false,
+          message: 'Organization ID required'
+        });
+      }
+
+      const result = await this.queueService.clearQueue(organizationId);
+
+      if (result.success) {
+        res.json({
+          success: true,
+          message: 'Queue cleared successfully',
+          data: result
+        });
+      } else {
+        res.status(400).json({
+          success: false,
+          message: result.message || 'Failed to clear queue',
+          error: result.error
+        });
+      }
+
+    } catch (error) {
+      logger.error('[WhatsAppController] Clear queue failed:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Internal server error',
+        error: error.message
+      });
+    }
+  }
+
+  /**
+   * Cancel specific message
+   */
+  async cancelMessage(req, res) {
+    try {
+      const { messageId } = req.params;
+      const organizationId = req.user?.organizationId;
+      
+      if (!organizationId || !messageId) {
+        return res.status(400).json({
+          success: false,
+          message: 'Organization ID and Message ID required'
+        });
+      }
+
+      const result = await this.queueService.cancelMessage(organizationId, messageId);
+
+      if (result.success) {
+        res.json({
+          success: true,
+          message: 'Message cancelled successfully',
+          data: result
+        });
+      } else {
+        res.status(400).json({
+          success: false,
+          message: result.message || 'Failed to cancel message',
+          error: result.error
+        });
+      }
+
+    } catch (error) {
+      logger.error('[WhatsAppController] Cancel message failed:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Internal server error',
+        error: error.message
+      });
+    }
+  }
+
+  /**
+   * Retry failed message
+   */
+  async retryMessage(req, res) {
+    try {
+      const { messageId } = req.params;
+      const organizationId = req.user?.organizationId;
+      
+      if (!organizationId || !messageId) {
+        return res.status(400).json({
+          success: false,
+          message: 'Organization ID and Message ID required'
+        });
+      }
+
+      const result = await this.queueService.retryMessage(organizationId, messageId);
+
+      if (result.success) {
+        res.json({
+          success: true,
+          message: 'Message queued for retry',
+          data: result
+        });
+      } else {
+        res.status(400).json({
+          success: false,
+          message: result.message || 'Failed to retry message',
+          error: result.error
+        });
+      }
+
+    } catch (error) {
+      logger.error('[WhatsAppController] Retry message failed:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Internal server error',
+        error: error.message
+      });
+    }
+  }
+
+  /**
+   * Get queued messages
+   */
+  async getQueuedMessages(req, res) {
+    try {
+      const organizationId = req.params.organizationId || req.user?.organizationId;
+      const { limit = 50 } = req.query;
+      
+      if (!organizationId) {
+        return res.status(400).json({
+          success: false,
+          message: 'Organization ID required'
+        });
+      }
+
+      const result = await this.queueService.getQueuedMessages(organizationId, parseInt(limit));
+
+      res.json({
+        success: true,
+        data: result
+      });
+
+    } catch (error) {
+      logger.error('[WhatsAppController] Get queued messages failed:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Internal server error',
+        error: error.message
+      });
+    }
+  }
+
+  /**
+   * Get duplicate prevention statistics
+   */
+  async getDuplicateStats(req, res) {
+    try {
+      const organizationId = req.params.organizationId || req.user?.organizationId;
+      const { period = 'today' } = req.query;
+      
+      if (!organizationId) {
+        return res.status(400).json({
+          success: false,
+          message: 'Organization ID required'
+        });
+      }
+
+      const stats = await this.queueService.duplicatePrevention.getPreventionStats(organizationId, period);
+
+      res.json({
+        success: true,
+        data: stats
+      });
+
+    } catch (error) {
+      logger.error('[WhatsAppController] Get duplicate stats failed:', error);
       res.status(500).json({
         success: false,
         message: 'Internal server error',
