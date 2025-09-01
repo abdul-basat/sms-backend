@@ -5,6 +5,8 @@
 
 const CoreMessagingService = require('./coreMessagingService');
 const MessageTemplateService = require('./messageTemplateService');
+const HumanBehaviorService = require('./humanBehaviorService');
+const EnhancedMessageQueueService = require('./enhancedMessageQueueService');
 const { db } = require('../config/firebase');
 const logger = require('../utils/logger');
 
@@ -12,6 +14,8 @@ class AutomatedFeeNotificationsService {
   constructor() {
     this.messagingService = new CoreMessagingService();
     this.templateService = new MessageTemplateService();
+    this.humanBehavior = new HumanBehaviorService();
+    this.messageQueue = new EnhancedMessageQueueService();
     this.reminderSchedules = new Map(); // organizationId -> reminder schedule
     this.lastReminderCheck = new Map(); // organizationId -> last check timestamp
   }
@@ -77,8 +81,8 @@ class AutomatedFeeNotificationsService {
         return 0;
       }
 
-      // Check business hours
-      if (!this.isWithinBusinessHours(reminderConfig.businessHours)) {
+      // Check business hours with timezone awareness
+      if (!this.isWithinBusinessHours(reminderConfig)) {
         logger.info(`[AutomatedFeeNotificationsService] Outside business hours for organization: ${organizationId}`);
         return 0;
       }
@@ -93,29 +97,48 @@ class AutomatedFeeNotificationsService {
 
       logger.info(`[AutomatedFeeNotificationsService] Found ${studentsToRemind.length} students needing reminders for organization: ${organizationId}`);
 
-      let sentCount = 0;
+      // Use enhanced queue for bulk processing with human behavior simulation
+      const behaviorConfig = {
+        pattern: reminderConfig.behaviorPattern || 'moderate',
+        typingSpeed: reminderConfig.typingSpeed || 'normal',
+        enableTypingIndicator: reminderConfig.enableTypingIndicator !== false,
+        enableJitter: reminderConfig.enableJitter !== false,
+        timezone: reminderConfig.timezone || process.env.TZ || 'Asia/Karachi',
+        businessHours: reminderConfig.businessHours || {
+          startTime: '09:00',
+          endTime: '17:00',
+          daysOfWeek: [1, 2, 3, 4, 5] // Monday to Friday
+        },
+        batchSize: reminderConfig.batchSize || 10
+      };
 
-      // Send reminders with rate limiting
-      for (const student of studentsToRemind) {
-        try {
-          const reminderSent = await this.sendFeeReminder(organizationId, student, reminderConfig);
-          if (reminderSent.success) {
-            sentCount++;
-          }
-
-          // Add delay between messages to respect rate limits
-          if (reminderConfig.delayBetweenMessages > 0) {
-            await this.delay(reminderConfig.delayBetweenMessages);
-          }
-
-        } catch (error) {
-          logger.error(`[AutomatedFeeNotificationsService] Failed to send reminder for student ${student.id}:`, error);
+      // Prepare messages for queue
+      const messages = studentsToRemind.map(student => ({
+        phoneNumber: student.phoneNumber,
+        content: this.formatReminderMessage(student, reminderConfig),
+        templateId: reminderConfig.templateId,
+        recipientId: student.id,
+        type: 'fee_reminder',
+        priority: this.determinePriority(student),
+        variables: {
+          studentName: student.name,
+          feeAmount: student.feeAmount,
+          dueDate: student.dueDate,
+          organizationName: reminderConfig.organizationName || 'Your Institute'
         }
+      }));
+
+      // Add to enhanced queue with human behavior
+      const queueResult = await this.messageQueue.addBulkToQueue(organizationId, messages, behaviorConfig);
+      
+      if (queueResult.success) {
+        logger.info(`[AutomatedFeeNotificationsService] ${queueResult.successCount}/${studentsToRemind.length} fee reminders queued successfully for organization: ${organizationId}`);
+        logger.info(`[AutomatedFeeNotificationsService] Estimated total processing time: ${Math.round(queueResult.estimatedTotalDelay / 1000)}s across ${queueResult.batches} batches`);
+      } else {
+        logger.error(`[AutomatedFeeNotificationsService] Failed to queue fee reminders: ${queueResult.error}`);
       }
 
-      logger.info(`[AutomatedFeeNotificationsService] Sent ${sentCount}/${studentsToRemind.length} reminders for organization: ${organizationId}`);
-      
-      return sentCount;
+      return queueResult.successCount || 0;
 
     } catch (error) {
       logger.error(`[AutomatedFeeNotificationsService] Failed to process reminders for organization ${organizationId}:`, error);
@@ -554,6 +577,83 @@ class AutomatedFeeNotificationsService {
   }
 
   /**
+   * Enhanced business hours check with timezone awareness
+   * @param {Object} reminderConfig - Reminder configuration
+   * @returns {boolean} - Whether within business hours
+   */
+  isWithinBusinessHours(reminderConfig) {
+    const timezone = reminderConfig.timezone || process.env.TZ || 'Asia/Karachi';
+    const businessHours = reminderConfig.businessHours || {
+      startTime: '09:00',
+      endTime: '17:00',
+      daysOfWeek: [1, 2, 3, 4, 5]
+    };
+
+    return this.humanBehavior.isWithinBusinessHours(timezone, businessHours);
+  }
+
+  /**
+   * Format reminder message with template variables
+   * @param {Object} student - Student data
+   * @param {Object} config - Reminder configuration
+   * @returns {string} - Formatted message
+   */
+  formatReminderMessage(student, config) {
+    const today = new Date();
+    const dueDate = new Date(student.dueDate);
+    const daysDifference = Math.ceil((dueDate - today) / (1000 * 60 * 60 * 24));
+
+    // Default template based on due date
+    let template = config.defaultTemplate || `Dear {studentName}, this is a reminder that your fee of Rs. {feeAmount} is due on {dueDate}. Please make the payment to avoid any late fees. Thank you!`;
+    
+    if (daysDifference < 0) {
+      template = config.overdueTemplate || `Dear {studentName}, your fee of Rs. {feeAmount} was due on {dueDate} and is now {daysDue} days overdue. Please make the payment immediately.`;
+    } else if (daysDifference <= 1) {
+      template = config.urgentTemplate || `Dear {studentName}, your fee of Rs. {feeAmount} is due TODAY ({dueDate}). Please make the payment immediately to avoid late fees.`;
+    }
+
+    // Replace variables
+    return template
+      .replace(/{studentName}/g, student.name)
+      .replace(/{parentName}/g, student.parentName || student.name)
+      .replace(/{feeAmount}/g, student.feeAmount || 'N/A')
+      .replace(/{dueDate}/g, this.formatDate(dueDate))
+      .replace(/{daysDue}/g, daysDifference < 0 ? Math.abs(daysDifference) : 0)
+      .replace(/{daysRemaining}/g, daysDifference > 0 ? daysDifference : 0)
+      .replace(/{organizationName}/g, config.organizationName || 'School')
+      .replace(/{contactInfo}/g, config.contactInfo || '');
+  }
+
+  /**
+   * Determine message priority based on student data
+   * @param {Object} student - Student data
+   * @returns {string} - Priority level
+   */
+  determinePriority(student) {
+    const today = new Date();
+    const dueDate = new Date(student.dueDate);
+    const daysDifference = Math.ceil((dueDate - today) / (1000 * 60 * 60 * 24));
+
+    if (daysDifference < 0) return 'high'; // Overdue
+    if (daysDifference <= 1) return 'high'; // Due today or tomorrow
+    if (daysDifference <= 3) return 'normal'; // Due in 2-3 days
+    return 'normal'; // Due later
+  }
+
+  /**
+   * Format date for display
+   * @param {Date} date - Date to format
+   * @returns {string} - Formatted date
+   */
+  formatDate(date) {
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  }
+
+  /**
    * Get default reminder configuration
    * @returns {Object} - Default configuration
    */
@@ -562,7 +662,17 @@ class AutomatedFeeNotificationsService {
       enabled: true,
       reminderDays: [3, 1, 0],
       overdueReminderDays: [1, 3, 7],
-      businessHours: { start: '09:00', end: '17:00' },
+      businessHours: {
+        startTime: '09:00',
+        endTime: '17:00',
+        daysOfWeek: [1, 2, 3, 4, 5]
+      },
+      timezone: 'Asia/Karachi',
+      behaviorPattern: 'moderate',
+      typingSpeed: 'normal',
+      enableTypingIndicator: true,
+      enableJitter: true,
+      batchSize: 10,
       delayBetweenMessages: 5000,
       organizationName: 'School',
       contactInfo: ''
