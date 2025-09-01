@@ -1,9 +1,13 @@
 const Queue = require('bull');
+const AutomatedFeeNotificationsService = require('./automatedFeeNotificationsService');
 
 class QueueService {
   constructor() {
     this.redisUrl = process.env.REDIS_URL || 'redis://redis:6379';
     this.messageQueue = new Queue('whatsapp-messages', this.redisUrl);
+    // Note: FeeNotificationsService is instantiated here to access config.
+    // In a larger app, a dependency injection container would be better.
+    this.feeNotificationsService = new AutomatedFeeNotificationsService();
     this.setupProcessors();
   }
 
@@ -13,7 +17,7 @@ class QueueService {
   setupProcessors() {
     // Process messages from the queue
     this.messageQueue.process(async (job) => {
-      const { phoneNumber, message, ruleId, studentId, studentName } = job.data;
+      const { organizationId, phoneNumber, message, studentName } = job.data;
       
       console.log(`🔄 Processing message for ${studentName} (${phoneNumber})`);
       
@@ -29,6 +33,16 @@ class QueueService {
         
         // Log success to Firebase
         await this.logSuccess(job.data);
+
+        // --- NEW: Implement randomized delay after sending ---
+        const config = await this.feeNotificationsService.getReminderConfiguration(organizationId);
+        const minDelay = (config.minDelaySeconds || 1) * 1000;
+        const maxDelay = (config.maxDelaySeconds || 5) * 1000;
+        const randomDelay = Math.floor(Math.random() * (maxDelay - minDelay + 1)) + minDelay;
+
+        console.log(`[QueueService] Waiting for ${randomDelay}ms before next job...`);
+        await new Promise(resolve => setTimeout(resolve, randomDelay));
+        // --- END NEW ---
         
         return result;
         
@@ -96,6 +110,31 @@ class QueueService {
       
     } catch (error) {
       console.error(`❌ Failed to add message to queue for ${messageData.studentName}:`, error.message);
+      throw error;
+    }
+  }
+
+  /**
+   * Schedule a message to be sent at a later time
+   * @param {Object} messageData - Message data
+   * @param {number} delay - Delay in milliseconds
+   * @returns {Promise<Object>} - Job object
+   */
+  async scheduleMessage(messageData, delay) {
+    try {
+      const job = await this.messageQueue.add(messageData, {
+        attempts: 3,
+        backoff: { type: 'exponential', delay: 5000 },
+        removeOnComplete: 1000,
+        removeOnFail: 5000,
+        delay: delay
+      });
+
+      console.log(`Scheduled message for ${messageData.studentName} with delay ${delay}ms (Job ID: ${job.id})`);
+      return job;
+
+    } catch (error) {
+      console.error(`Failed to schedule message for ${messageData.studentName}:`, error.message);
       throw error;
     }
   }

@@ -4,6 +4,7 @@
  */
 
 const { v4: uuidv4 } = require('uuid');
+const _ = require('lodash');
 const { AppError } = require('../middleware/errorHandler');
 const logger = require('../utils/logger');
 
@@ -408,11 +409,15 @@ const updateOrganization = async (req, res) => {
       throw new AppError('Insufficient permissions to update this organization', 403);
     }
 
-    // Prepare update data
-    const updateData = {
-      ...updates,
-      updatedAt: new Date(),
-    };
+    // Prepare update data by cloning
+    const updateData = { ...updates };
+
+    // If reminderConfig is part of the update, deep merge it
+    if (updates.reminderConfig) {
+      updateData.reminderConfig = _.merge({}, organization.reminderConfig, updates.reminderConfig);
+    }
+
+    updateData.updatedAt = new Date();
 
     // Remove read-only fields
     delete updateData.id;

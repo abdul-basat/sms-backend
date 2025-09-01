@@ -3,8 +3,10 @@
  * Handles automated fee reminders and payment confirmations
  */
 
+const moment = require('moment-timezone');
 const CoreMessagingService = require('./coreMessagingService');
 const MessageTemplateService = require('./messageTemplateService');
+const QueueService = require('./queueService');
 const { db } = require('../config/firebase');
 const logger = require('../utils/logger');
 
@@ -12,191 +14,176 @@ class AutomatedFeeNotificationsService {
   constructor() {
     this.messagingService = new CoreMessagingService();
     this.templateService = new MessageTemplateService();
+    this.queueService = new QueueService();
     this.reminderSchedules = new Map(); // organizationId -> reminder schedule
     this.lastReminderCheck = new Map(); // organizationId -> last check timestamp
   }
 
   /**
-   * Check and send due date reminders for all organizations
-   * Called by cron job every hour
+   * Finds students who need reminders and queues the messages to be sent at a random time
+   * within the organization's configured sending window.
+   * Called by the cron job every 5 minutes.
    */
-  async checkAndSendDueDateReminders() {
+  async enqueueScheduledReminders() {
     try {
-      logger.info('[AutomatedFeeNotificationsService] Starting due date reminder check');
-
-      // Get all organizations with WhatsApp enabled
+      logger.info('[AutomatedFeeNotificationsService] Starting reminder enqueue job');
       const organizations = await this.getOrganizationsWithWhatsApp();
-      
-      let totalReminders = 0;
-      let totalOrganizations = organizations.length;
+      let totalQueued = 0;
 
       for (const organization of organizations) {
-        try {
-          const reminderCount = await this.processOrganizationReminders(organization.id);
-          totalReminders += reminderCount;
-          
-          // Update last check timestamp
-          this.lastReminderCheck.set(organization.id, Date.now());
+        const reminderConfig = await this.getReminderConfiguration(organization.id);
+        if (!reminderConfig.enabled) {
+          continue;
+        }
 
-        } catch (error) {
-          logger.error(`[AutomatedFeeNotificationsService] Failed to process reminders for organization ${organization.id}:`, error);
+        const studentsToRemind = await this.getStudentsForReminders(organization.id, reminderConfig);
+        if (studentsToRemind.length === 0) {
+          continue;
+        }
+
+        logger.info(`[AutomatedFeeNotificationsService] Found ${studentsToRemind.length} potential students for reminders in organization: ${organization.id}`);
+
+        for (const student of studentsToRemind) {
+          const reminderType = student.reminderType; // 'upcoming' or 'overdue'
+
+          // 1. Check if already queued today to prevent duplicates
+          const alreadyQueued = await this.checkIfQueuedToday(organization.id, student.id, reminderType);
+          if (alreadyQueued) {
+            logger.info(`[AutomatedFeeNotificationsService] Reminder for student ${student.id} already queued today.`);
+            continue;
+          }
+
+          // 2. Generate message content from template
+          const messageContent = await this.generateReminderMessage(organization.id, student, reminderConfig);
+          if (!messageContent) {
+            logger.error(`[AutomatedFeeNotificationsService] Could not generate message for student ${student.id}.`);
+            continue;
+          }
+
+          // 3. Calculate random send time and delay
+          const timezone = process.env.TZ || 'Asia/Karachi';
+          const now = moment.tz(timezone);
+          const sendWindowStart = moment.tz(reminderConfig.sendWindowStart, 'HH:mm', timezone);
+          const sendWindowEnd = moment.tz(reminderConfig.sendWindowEnd, 'HH:mm', timezone);
+
+          // Ensure the window is for the current day
+          sendWindowStart.day(now.day());
+          sendWindowEnd.day(now.day());
+
+          // If the current time is already past the send window, do nothing for today
+          if (now.isAfter(sendWindowEnd)) {
+            logger.info(`[AutomatedFeeNotificationsService] Current time is past the sending window for organization ${organization.id}.`);
+            continue;
+          }
+
+          // Set the earliest send time to be now() or the start of the window, whichever is later
+          const earliestSendTime = moment.max(now, sendWindowStart);
+
+          const randomSendTime = moment(earliestSendTime).add(Math.random() * (sendWindowEnd.diff(earliestSendTime)), 'ms');
+          const delay = randomSendTime.diff(now);
+
+          // 4. Schedule the job
+          const jobData = {
+            organizationId: organization.id,
+            studentId: student.id,
+            studentName: student.name,
+            phoneNumber: student.whatsappNumber || student.phoneNumber,
+            message: messageContent,
+            type: 'automated_fee_reminder',
+            reminderType: reminderType
+          };
+
+          await this.queueService.scheduleMessage(jobData, delay);
+          totalQueued++;
+
+          // 5. Log that the reminder has been queued
+          await this.logReminderQueued(organization.id, student.id, reminderType);
         }
       }
 
-      logger.info(`[AutomatedFeeNotificationsService] Due date reminder check completed: ${totalReminders} reminders sent across ${totalOrganizations} organizations`);
-
-      return {
-        success: true,
-        totalOrganizations,
-        totalReminders,
-        processedAt: new Date()
-      };
+      logger.info(`[AutomatedFeeNotificationsService] Enqueue job completed: ${totalQueued} reminders queued for ${organizations.length} organizations`);
+      return { success: true, totalOrganizations: organizations.length, totalQueued };
 
     } catch (error) {
-      logger.error('[AutomatedFeeNotificationsService] Failed to check due date reminders:', error);
-      return {
-        success: false,
-        error: error.message
-      };
+      logger.error('[AutomatedFeeNotificationsService] Failed to enqueue reminders:', error);
+      return { success: false, error: error.message, totalQueued: 0 };
     }
   }
 
   /**
-   * Process reminders for a specific organization
-   * @param {string} organizationId - Organization ID
-   * @returns {Promise<number>} - Number of reminders sent
+   * Generates the reminder message content using the template service.
    */
-  async processOrganizationReminders(organizationId) {
+  async generateReminderMessage(organizationId, student, config) {
+    const today = new Date();
+    const dueDate = new Date(student.dueDate);
+    const daysDifference = Math.ceil((dueDate - today) / (1000 * 60 * 60 * 24));
+
+    const template = await this.templateService.getTemplateByCategory(organizationId, 'fee_reminder');
+    if (!template) {
+      logger.error(`[AutomatedFeeNotificationsService] No fee reminder template found for organization: ${organizationId}`);
+      return null;
+    }
+
+    const variables = {
+      studentName: student.name,
+      parentName: student.parentName || student.name,
+      feeAmount: student.feeAmount || 'N/A',
+      dueDate: this.formatDate(dueDate),
+      className: student.className || student.class || 'N/A',
+      daysDue: daysDifference < 0 ? Math.abs(daysDifference) : 0,
+      daysRemaining: daysDifference > 0 ? daysDifference : 0,
+      organizationName: config.organizationName || 'School',
+      contactInfo: config.contactInfo || ''
+    };
+
+    // This is a simplified version of message generation.
+    // A more robust implementation would use a templating engine.
+    let message = template.content;
+    for (const key in variables) {
+      message = message.replace(new RegExp(`{{${key}}}`, 'g'), variables[key]);
+    }
+    return message;
+  }
+
+  /**
+   * Checks if a reminder has already been queued for this student/type today.
+   */
+  async checkIfQueuedToday(organizationId, studentId, reminderType) {
     try {
-      logger.info(`[AutomatedFeeNotificationsService] Processing reminders for organization: ${organizationId}`);
+      const timezone = process.env.TZ || 'Asia/Karachi';
+      const todayStr = moment.tz(timezone).format('YYYY-MM-DD');
+      const logId = `${organizationId}_${studentId}_${reminderType}_${todayStr}`;
 
-      // Get organization reminder configuration
-      const reminderConfig = await this.getReminderConfiguration(organizationId);
-      if (!reminderConfig.enabled) {
-        logger.info(`[AutomatedFeeNotificationsService] Reminders disabled for organization: ${organizationId}`);
-        return 0;
-      }
-
-      // Check business hours
-      if (!this.isWithinBusinessHours(reminderConfig.businessHours)) {
-        logger.info(`[AutomatedFeeNotificationsService] Outside business hours for organization: ${organizationId}`);
-        return 0;
-      }
-
-      // Get students with upcoming or overdue fees
-      const studentsToRemind = await this.getStudentsForReminders(organizationId, reminderConfig);
-      
-      if (studentsToRemind.length === 0) {
-        logger.info(`[AutomatedFeeNotificationsService] No students need reminders for organization: ${organizationId}`);
-        return 0;
-      }
-
-      logger.info(`[AutomatedFeeNotificationsService] Found ${studentsToRemind.length} students needing reminders for organization: ${organizationId}`);
-
-      let sentCount = 0;
-
-      // Send reminders with rate limiting
-      for (const student of studentsToRemind) {
-        try {
-          const reminderSent = await this.sendFeeReminder(organizationId, student, reminderConfig);
-          if (reminderSent.success) {
-            sentCount++;
-          }
-
-          // Add delay between messages to respect rate limits
-          if (reminderConfig.delayBetweenMessages > 0) {
-            await this.delay(reminderConfig.delayBetweenMessages);
-          }
-
-        } catch (error) {
-          logger.error(`[AutomatedFeeNotificationsService] Failed to send reminder for student ${student.id}:`, error);
-        }
-      }
-
-      logger.info(`[AutomatedFeeNotificationsService] Sent ${sentCount}/${studentsToRemind.length} reminders for organization: ${organizationId}`);
-      
-      return sentCount;
-
+      const doc = await db.collection('dailyQueueLog').doc(logId).get();
+      return doc.exists;
     } catch (error) {
-      logger.error(`[AutomatedFeeNotificationsService] Failed to process reminders for organization ${organizationId}:`, error);
-      return 0;
+      logger.error(`[AutomatedFeeNotificationsService] Error checking if queued today:`, error);
+      return false; // Fail open to allow queueing
     }
   }
 
   /**
-   * Send individual fee reminder
-   * @param {string} organizationId - Organization ID
-   * @param {Object} student - Student data
-   * @param {Object} config - Reminder configuration
-   * @returns {Promise<Object>} - Send result
+   * Logs that a reminder has been queued for today.
    */
-  async sendFeeReminder(organizationId, student, config) {
+  async logReminderQueued(organizationId, studentId, reminderType) {
     try {
-      // Determine reminder type based on due date
-      const today = new Date();
-      const dueDate = new Date(student.dueDate);
-      const daysDifference = Math.ceil((dueDate - today) / (1000 * 60 * 60 * 24));
+      const timezone = process.env.TZ || 'Asia/Karachi';
+      const todayStr = moment.tz(timezone).format('YYYY-MM-DD');
+      const logId = `${organizationId}_${studentId}_${reminderType}_${todayStr}`;
 
-      let reminderType = 'fee_reminder';
-      if (daysDifference < 0) {
-        reminderType = 'fee_overdue';
-      } else if (daysDifference <= 1) {
-        reminderType = 'fee_urgent';
-      }
-
-      // Get appropriate template
-      const template = await this.templateService.getTemplateByCategory(organizationId, 'fee_reminder');
-      if (!template) {
-        logger.error(`[AutomatedFeeNotificationsService] No fee reminder template found for organization: ${organizationId}`);
-        return { success: false, error: 'No reminder template found' };
-      }
-
-      // Prepare template variables
-      const variables = {
-        studentName: student.name,
-        parentName: student.parentName || student.name,
-        feeAmount: student.feeAmount || 'N/A',
-        dueDate: this.formatDate(dueDate),
-        className: student.className || student.class || 'N/A',
-        daysDue: daysDifference < 0 ? Math.abs(daysDifference) : 0,
-        daysRemaining: daysDifference > 0 ? daysDifference : 0,
-        organizationName: config.organizationName || 'School',
-        contactInfo: config.contactInfo || ''
+      const logEntry = {
+        organizationId,
+        studentId,
+        reminderType,
+        queuedAt: new Date(),
       };
 
-      // Check if reminder was already sent recently
-      const recentReminder = await this.checkRecentReminder(organizationId, student.id, reminderType);
-      if (recentReminder) {
-        logger.info(`[AutomatedFeeNotificationsService] Reminder already sent recently for student ${student.id}`);
-        return { success: false, error: 'Reminder already sent recently' };
-      }
-
-      // Send message
-      const messageData = {
-        recipientId: student.id,
-        phoneNumber: student.whatsappNumber || student.phoneNumber,
-        templateId: template.id,
-        variables,
-        type: 'automated_fee_reminder',
-        priority: daysDifference < 0 ? 'high' : 'normal'
-      };
-
-      const result = await this.messagingService.sendMessage(organizationId, messageData);
-
-      if (result.success) {
-        // Log the reminder
-        await this.logReminderSent(organizationId, student.id, reminderType, result.messageId);
-        
-        logger.info(`[AutomatedFeeNotificationsService] Fee reminder sent to student ${student.id} (${student.name})`);
-      }
-
-      return result;
-
+      await db.collection('dailyQueueLog').doc(logId).set(logEntry);
     } catch (error) {
-      logger.error(`[AutomatedFeeNotificationsService] Failed to send fee reminder for student ${student.id}:`, error);
-      return { success: false, error: error.message };
+      logger.error(`[AutomatedFeeNotificationsService] Error logging reminder queue status:`, error);
     }
   }
+
 
   /**
    * Send payment confirmation (called when payment is received)
@@ -305,8 +292,10 @@ class AutomatedFeeNotificationsService {
         enabled: reminderConfig.enabled !== false,
         reminderDays: reminderConfig.reminderDays || [3, 1, 0], // 3 days before, 1 day before, on due date
         overdueReminderDays: reminderConfig.overdueReminderDays || [1, 3, 7], // 1, 3, 7 days after due date
-        businessHours: reminderConfig.businessHours || { start: '09:00', end: '17:00' },
-        delayBetweenMessages: reminderConfig.delayBetweenMessages || 5000, // 5 seconds
+        sendWindowStart: reminderConfig.sendWindowStart || '09:00',
+        sendWindowEnd: reminderConfig.sendWindowEnd || '17:00',
+        minDelaySeconds: reminderConfig.minDelaySeconds || 5,
+        maxDelaySeconds: reminderConfig.maxDelaySeconds || 15,
         organizationName: orgData.name || 'School',
         contactInfo: orgData.contactInfo || ''
       };
@@ -420,57 +409,6 @@ class AutomatedFeeNotificationsService {
     }
   }
 
-  /**
-   * Check if reminder was sent recently
-   * @param {string} organizationId - Organization ID
-   * @param {string} studentId - Student ID
-   * @param {string} reminderType - Reminder type
-   * @returns {Promise<boolean>} - True if reminder was sent recently
-   */
-  async checkRecentReminder(organizationId, studentId, reminderType) {
-    try {
-      const twentyFourHoursAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
-
-      const snapshot = await db.collection('reminderLogs')
-        .where('organizationId', '==', organizationId)
-        .where('studentId', '==', studentId)
-        .where('reminderType', '==', reminderType)
-        .where('sentAt', '>=', twentyFourHoursAgo)
-        .limit(1)
-        .get();
-
-      return !snapshot.empty;
-
-    } catch (error) {
-      logger.error(`[AutomatedFeeNotificationsService] Failed to check recent reminders:`, error);
-      return false; // Allow sending on error
-    }
-  }
-
-  /**
-   * Log reminder sent
-   * @param {string} organizationId - Organization ID
-   * @param {string} studentId - Student ID
-   * @param {string} reminderType - Reminder type
-   * @param {string} messageId - Message ID
-   */
-  async logReminderSent(organizationId, studentId, reminderType, messageId) {
-    try {
-      const logEntry = {
-        organizationId,
-        studentId,
-        reminderType,
-        messageId,
-        sentAt: new Date(),
-        id: `reminder_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
-      };
-
-      await db.collection('reminderLogs').doc(logEntry.id).set(logEntry);
-
-    } catch (error) {
-      logger.error('[AutomatedFeeNotificationsService] Failed to log reminder:', error);
-    }
-  }
 
   /**
    * Log payment confirmation sent
@@ -520,25 +458,6 @@ class AutomatedFeeNotificationsService {
     }
   }
 
-  /**
-   * Check if current time is within business hours
-   * @param {Object} businessHours - Business hours configuration
-   * @returns {boolean} - True if within business hours
-   */
-  isWithinBusinessHours(businessHours) {
-    const now = new Date();
-    const currentHour = now.getHours();
-    const currentMinute = now.getMinutes();
-    const currentTime = currentHour * 60 + currentMinute;
-
-    const [startHour, startMinute] = businessHours.start.split(':').map(Number);
-    const [endHour, endMinute] = businessHours.end.split(':').map(Number);
-    
-    const startTime = startHour * 60 + startMinute;
-    const endTime = endHour * 60 + endMinute;
-
-    return currentTime >= startTime && currentTime <= endTime;
-  }
 
   /**
    * Format date for display
@@ -562,21 +481,15 @@ class AutomatedFeeNotificationsService {
       enabled: true,
       reminderDays: [3, 1, 0],
       overdueReminderDays: [1, 3, 7],
-      businessHours: { start: '09:00', end: '17:00' },
-      delayBetweenMessages: 5000,
+      sendWindowStart: '09:00',
+      sendWindowEnd: '17:00',
+      minDelaySeconds: 5,
+      maxDelaySeconds: 15,
       organizationName: 'School',
       contactInfo: ''
     };
   }
 
-  /**
-   * Delay execution
-   * @param {number} ms - Milliseconds to delay
-   * @returns {Promise} - Promise that resolves after delay
-   */
-  delay(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
 }
 
 module.exports = AutomatedFeeNotificationsService;

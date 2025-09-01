@@ -74,6 +74,22 @@ const updateOrganizationValidation = [
     .isString()
     .isLength({ max: 500 })
     .withMessage('Address must be a string with maximum 500 characters'),
+  body('reminderConfig.sendWindowStart')
+    .optional()
+    .matches(/^([01]\d|2[0-3]):([0-5]\d)$/)
+    .withMessage('Send window start time must be in HH:mm format'),
+  body('reminderConfig.sendWindowEnd')
+    .optional()
+    .matches(/^([01]\d|2[0-3]):([0-5]\d)$/)
+    .withMessage('Send window end time must be in HH:mm format'),
+  body('reminderConfig.minDelaySeconds')
+    .optional()
+    .isInt({ min: 1 })
+    .withMessage('Minimum delay must be a positive integer'),
+  body('reminderConfig.maxDelaySeconds')
+    .optional()
+    .isInt({ min: 1 })
+    .withMessage('Maximum delay must be a positive integer'),
   validationMiddleware,
 ];
 

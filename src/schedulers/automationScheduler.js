@@ -107,15 +107,15 @@ class AutomationScheduler {
    * Schedule fee reminder checks
    */
   scheduleFeeReminders() {
-    console.log('💰 Scheduling fee reminder checks (every hour at minute 5)...');
+    console.log('💰 Scheduling fee reminder enqueuer (every 5 minutes)...');
 
-    const job = cron.schedule('5 * * * *', async () => {
+    const job = cron.schedule('*/5 * * * *', async () => {
       try {
-        console.log('🔔 Running automated fee reminder check...');
-        const result = await this.feeNotificationsService.checkAndSendDueDateReminders();
-        console.log(`📊 Fee reminders completed: ${result.totalReminders} reminders sent to ${result.totalOrganizations} organizations`);
+        console.log('⏰ Running fee reminder enqueuer job...');
+        const result = await this.feeNotificationsService.enqueueScheduledReminders();
+        console.log(`📊 Enqueuer job completed: ${result.totalQueued} reminders queued for ${result.totalOrganizations} organizations`);
       } catch (error) {
-        console.error('❌ Fee reminder check failed:', error.message);
+        console.error('❌ Fee reminder enqueuer job failed:', error.message);
       }
     }, {
       scheduled: true,
@@ -123,7 +123,7 @@ class AutomationScheduler {
     });
 
     this.cronJobs.push(job);
-    console.log('✅ Fee reminder checks scheduled');
+    console.log('✅ Fee reminder enqueuer scheduled');
   }
 
   /**
