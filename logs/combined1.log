@@ -4532,3 +4532,1098 @@
 {"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 14:23:38"}
 {"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 14:23:38"}
 {"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 14:23:38"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 15:49:56","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 15:49:58"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 15:49:58"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 15:49:58"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 15:49:58"}
+{"level":"info","message":"🤖 Automation scheduler started successfully","timestamp":"2025-09-02 15:49:58"}
+{"level":"info","message":"🚀 Fees Manager Backend Server running on port 3001","timestamp":"2025-09-02 15:49:58"}
+{"level":"info","message":"Environment: production","timestamp":"2025-09-02 15:49:58"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","timestamp":"2025-09-02 15:49:58"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 15:50:00"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 15:50:00"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 15:50:00"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 15:50:00"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 15:50:01"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 15:50:01"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 15:50:01"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 15:50:01"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 15:50:01"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 15:50:01"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 15:50:01"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 15:50:01"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 15:56:37","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 15:56:38"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 15:56:38"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 15:56:38"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 15:56:38"}
+{"level":"info","message":"🤖 Automation scheduler started successfully","timestamp":"2025-09-02 15:56:38"}
+{"level":"info","message":"🚀 Fees Manager Backend Server running on port 3001","timestamp":"2025-09-02 15:56:38"}
+{"level":"info","message":"Environment: production","timestamp":"2025-09-02 15:56:38"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","timestamp":"2025-09-02 15:56:38"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 15:56:40"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 15:56:40"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 15:56:40"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 15:56:40"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 15:56:41"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 15:56:41"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 15:56:41"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 15:56:41"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 15:56:41"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 15:56:41"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 15:56:41"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 15:56:41"}
+{"level":"info","message":"[AutomatedAttendanceNotificationsService] Starting daily attendance notification check","timestamp":"2025-09-02 16:00:00"}
+{"level":"error","message":"[AutomatedAttendanceNotificationsService] Failed to get organizations with attendance notifications: Cannot read properties of null (reading 'collection')","stack":"TypeError: Cannot read properties of null (reading 'collection')\n    at AutomatedAttendanceNotificationsService.getOrganizationsWithAttendanceNotifications (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\services\\automatedAttendanceNotificationsService.js:378:33)\n    at AutomatedAttendanceNotificationsService.checkAndSendDailyAttendanceNotifications (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\services\\automatedAttendanceNotificationsService.js:32:40)\n    at cron.schedule.scheduled [as _execution] (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\schedulers\\automationScheduler.js:144:68)\n    at Task.execute (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\task.js:17:25)\n    at ScheduledTask.now (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\scheduled-task.js:38:33)\n    at Scheduler.<anonymous> (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\scheduled-task.js:25:18)\n    at Scheduler.emit (node:events:524:28)\n    at Timeout.matchTime [as _onTimeout] (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\scheduler.js:30:26)\n    at listOnTimeout (node:internal/timers:581:17)\n    at process.processTimers (node:internal/timers:519:7)","timestamp":"2025-09-02 16:00:00"}
+{"level":"info","message":"[AutomatedAttendanceNotificationsService] Daily attendance check completed: 0 notifications sent across 0 organizations","timestamp":"2025-09-02 16:00:00"}
+{"level":"info","message":"[AutomatedFeeNotificationsService] Starting due date reminder check","timestamp":"2025-09-02 16:05:00"}
+{"level":"info","message":"[AutomatedFeeNotificationsService] Due date reminder check completed: 0 reminders sent across 0 organizations","timestamp":"2025-09-02 16:05:01"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 16:05:59","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 16:06:01"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 16:06:01"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 16:06:01"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 16:06:01"}
+{"level":"info","message":"🤖 Automation scheduler started successfully","timestamp":"2025-09-02 16:06:01"}
+{"level":"info","message":"🚀 Fees Manager Backend Server running on port 3001","timestamp":"2025-09-02 16:06:01"}
+{"level":"info","message":"Environment: production","timestamp":"2025-09-02 16:06:01"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","timestamp":"2025-09-02 16:06:01"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 16:06:03"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:06:03"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:06:03"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 16:06:03"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:06:04"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:06:04"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:06:04"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:06:04"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:06:04"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:06:04"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:06:04"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:06:04"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 16:06:15","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 16:06:16"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 16:06:16"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 16:06:16"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 16:06:16"}
+{"level":"info","message":"🤖 Automation scheduler started successfully","timestamp":"2025-09-02 16:06:16"}
+{"level":"info","message":"🚀 Fees Manager Backend Server running on port 3001","timestamp":"2025-09-02 16:06:16"}
+{"level":"info","message":"Environment: production","timestamp":"2025-09-02 16:06:16"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","timestamp":"2025-09-02 16:06:16"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 16:06:18"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:06:18"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:06:18"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 16:06:18"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:06:19"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:06:19"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:06:19"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:06:19"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:06:19"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:06:19"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:06:19"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:06:19"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 16:06:39","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 16:06:40"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 16:06:40"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 16:06:40"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 16:06:40"}
+{"level":"info","message":"🤖 Automation scheduler started successfully","timestamp":"2025-09-02 16:06:40"}
+{"level":"info","message":"🚀 Fees Manager Backend Server running on port 3001","timestamp":"2025-09-02 16:06:40"}
+{"level":"info","message":"Environment: production","timestamp":"2025-09-02 16:06:40"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","timestamp":"2025-09-02 16:06:40"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 16:06:42"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:06:42"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:06:42"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 16:06:42"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:06:43"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:06:43"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:06:43"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:06:43"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:06:43"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:06:43"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:06:43"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:06:43"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 16:06:46","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 16:06:47"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 16:06:47"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 16:06:47"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 16:06:47"}
+{"level":"info","message":"🤖 Automation scheduler started successfully","timestamp":"2025-09-02 16:06:47"}
+{"level":"info","message":"🚀 Fees Manager Backend Server running on port 3001","timestamp":"2025-09-02 16:06:47"}
+{"level":"info","message":"Environment: production","timestamp":"2025-09-02 16:06:47"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","timestamp":"2025-09-02 16:06:47"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 16:06:49"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:06:49"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:06:49"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 16:06:49"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:06:50"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:06:50"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:06:50"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:06:50"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:06:50"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:06:50"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:06:50"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:06:50"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 16:07:38","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 16:07:40"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 16:07:40"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 16:07:40"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 16:07:40"}
+{"level":"info","message":"🤖 Automation scheduler started successfully","timestamp":"2025-09-02 16:07:41"}
+{"level":"info","message":"🚀 Fees Manager Backend Server running on port 3001","timestamp":"2025-09-02 16:07:41"}
+{"level":"info","message":"Environment: production","timestamp":"2025-09-02 16:07:41"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","timestamp":"2025-09-02 16:07:41"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 16:07:42"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:07:42"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:07:42"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 16:07:42"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:07:44"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:07:44"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:07:44"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:07:44"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:07:44"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:07:44"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:07:44"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:07:44"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 16:07:53","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 16:07:54"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 16:07:54"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 16:07:54"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 16:07:54"}
+{"level":"info","message":"🤖 Automation scheduler started successfully","timestamp":"2025-09-02 16:07:54"}
+{"level":"info","message":"🚀 Fees Manager Backend Server running on port 3001","timestamp":"2025-09-02 16:07:54"}
+{"level":"info","message":"Environment: production","timestamp":"2025-09-02 16:07:54"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","timestamp":"2025-09-02 16:07:54"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 16:07:56"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:07:56"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:07:56"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 16:07:56"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:07:57"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:07:57"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:07:57"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:07:57"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:07:57"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:07:57"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:07:57"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:07:57"}
+{"contentLength":"56b","ip":"::1","level":"warn","message":"Request completed with client error:","method":"GET","responseTime":"2ms","statusCode":401,"timestamp":"2025-09-02 16:13:46","url":"/api/automation/rules/defaultOrg","user":"anonymous","userAgent":"Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.19041.6093"}
+{"contentLength":"107b","ip":"::1","level":"info","message":"Request completed:","method":"GET","responseTime":"1ms","statusCode":200,"timestamp":"2025-09-02 16:13:56","url":"/health","user":"anonymous","userAgent":"Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.19041.6093"}
+{"level":"info","message":"[AutomatedAttendanceNotificationsService] Starting daily attendance notification check","timestamp":"2025-09-02 16:15:00"}
+{"level":"error","message":"[AutomatedAttendanceNotificationsService] Failed to get organizations with attendance notifications: Cannot read properties of null (reading 'collection')","stack":"TypeError: Cannot read properties of null (reading 'collection')\n    at AutomatedAttendanceNotificationsService.getOrganizationsWithAttendanceNotifications (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\services\\automatedAttendanceNotificationsService.js:378:33)\n    at AutomatedAttendanceNotificationsService.checkAndSendDailyAttendanceNotifications (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\services\\automatedAttendanceNotificationsService.js:32:40)\n    at cron.schedule.scheduled [as _execution] (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\schedulers\\automationScheduler.js:144:68)\n    at Task.execute (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\task.js:17:25)\n    at ScheduledTask.now (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\scheduled-task.js:38:33)\n    at Scheduler.<anonymous> (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\scheduled-task.js:25:18)\n    at Scheduler.emit (node:events:524:28)\n    at Timeout.matchTime [as _onTimeout] (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\scheduler.js:30:26)\n    at listOnTimeout (node:internal/timers:581:17)\n    at process.processTimers (node:internal/timers:519:7)","timestamp":"2025-09-02 16:15:00"}
+{"level":"info","message":"[AutomatedAttendanceNotificationsService] Daily attendance check completed: 0 notifications sent across 0 organizations","timestamp":"2025-09-02 16:15:00"}
+{"contentLength":"107b","ip":"::1","level":"info","message":"Request completed:","method":"GET","responseTime":"0ms","statusCode":200,"timestamp":"2025-09-02 16:16:09","url":"/health","user":"anonymous","userAgent":"node"}
+{"contentLength":"56b","ip":"::1","level":"warn","message":"Request completed with client error:","method":"GET","responseTime":"1ms","statusCode":401,"timestamp":"2025-09-02 16:16:09","url":"/api/automation/rules/defaultOrg","user":"anonymous","userAgent":"node"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 16:25:28","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 16:25:29"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 16:25:29"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 16:25:29"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 16:25:29"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 16:25:32"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:25:32"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:25:32"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 16:25:32"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:25:32"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:25:32"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:25:32"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:25:32"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:25:32"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:25:32"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:25:32"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:25:32"}
+{"level":"error","message":"Failed to start server: WPPConnect server is not connected","stack":"Error: WPPConnect server is not connected\n    at AutomationService.start (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\services\\automationService.js:34:17)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async AutomationScheduler.start (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\schedulers\\automationScheduler.js:30:7)\n    at async startServer (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\server.js:163:5)","timestamp":"2025-09-02 16:25:35"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 16:27:30","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 16:27:31"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 16:27:31"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 16:27:31"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 16:27:31"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 16:27:33"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:27:33"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:27:33"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 16:27:33"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:27:34"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:27:34"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:27:34"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:27:34"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:27:34"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:27:34"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:27:34"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:27:34"}
+{"level":"info","message":"🤖 Automation scheduler started successfully","timestamp":"2025-09-02 16:27:41"}
+{"level":"info","message":"🚀 Fees Manager Backend Server running on port 3001","timestamp":"2025-09-02 16:27:41"}
+{"level":"info","message":"Environment: production","timestamp":"2025-09-02 16:27:41"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","timestamp":"2025-09-02 16:27:41"}
+{"level":"info","message":"Received SIGINT. Starting graceful shutdown...","timestamp":"2025-09-02 16:28:00"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 16:29:31","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 16:29:32"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 16:29:32"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 16:29:32"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 16:29:32"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 16:29:34"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:29:34"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:29:34"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 16:29:34"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:29:35"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:29:35"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:29:35"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:29:35"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:29:35"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:29:35"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:29:35"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:29:35"}
+{"level":"info","message":"🤖 Automation scheduler started successfully","timestamp":"2025-09-02 16:29:42"}
+{"level":"info","message":"🚀 Fees Manager Backend Server running on port 3001","timestamp":"2025-09-02 16:29:42"}
+{"level":"info","message":"Environment: production","timestamp":"2025-09-02 16:29:42"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","timestamp":"2025-09-02 16:29:42"}
+{"level":"info","message":"Received SIGINT. Starting graceful shutdown...","timestamp":"2025-09-02 16:29:58"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 16:30:18","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 16:30:19"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 16:30:19"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 16:30:19"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 16:30:19"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 16:30:21"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:30:21"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:30:21"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 16:30:21"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:30:22"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:30:22"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:30:22"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:30:22"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:30:22"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:30:22"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:30:22"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:30:22"}
+{"level":"info","message":"🤖 Automation scheduler started successfully","timestamp":"2025-09-02 16:30:29"}
+{"level":"info","message":"🚀 Fees Manager Backend Server running on port 3001","timestamp":"2025-09-02 16:30:29"}
+{"level":"info","message":"Environment: production","timestamp":"2025-09-02 16:30:29"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","timestamp":"2025-09-02 16:30:29"}
+{"level":"info","message":"Received SIGINT. Starting graceful shutdown...","timestamp":"2025-09-02 16:30:39"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 16:32:55","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 16:32:56"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 16:32:56"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 16:32:56"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 16:32:56"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 16:32:58"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:32:58"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:32:58"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 16:32:58"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:32:59"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:32:59"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:32:59"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:32:59"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:32:59"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:32:59"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:32:59"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:32:59"}
+{"level":"info","message":"🤖 Automation scheduler started successfully","timestamp":"2025-09-02 16:33:06"}
+{"level":"info","message":"🚀 Fees Manager Backend Server running on port 3001","timestamp":"2025-09-02 16:33:06"}
+{"level":"info","message":"Environment: production","timestamp":"2025-09-02 16:33:06"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","timestamp":"2025-09-02 16:33:06"}
+{"level":"info","message":"Received SIGINT. Starting graceful shutdown...","timestamp":"2025-09-02 16:33:30"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 16:34:30","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 16:34:31"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 16:34:31"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 16:34:31"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 16:34:31"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 16:34:33"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:34:33"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:34:33"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 16:34:33"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:34:34"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:34:34"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:34:34"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:34:34"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:34:34"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:34:34"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:34:34"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:34:34"}
+{"level":"info","message":"🤖 Automation scheduler started successfully","timestamp":"2025-09-02 16:34:41"}
+{"level":"info","message":"🚀 Fees Manager Backend Server running on port 3001","timestamp":"2025-09-02 16:34:41"}
+{"level":"info","message":"Environment: production","timestamp":"2025-09-02 16:34:41"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","timestamp":"2025-09-02 16:34:41"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 16:34:48","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 16:34:49"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 16:34:49"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 16:34:49"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 16:34:49"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 16:34:51"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:34:51"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:34:51"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 16:34:51"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:34:52"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:34:52"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:34:52"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:34:52"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:34:52"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:34:52"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:34:52"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:34:52"}
+{"level":"info","message":"🤖 Automation scheduler started successfully","timestamp":"2025-09-02 16:34:59"}
+{"level":"info","message":"🚀 Fees Manager Backend Server running on port 3001","timestamp":"2025-09-02 16:34:59"}
+{"level":"info","message":"Environment: production","timestamp":"2025-09-02 16:34:59"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","timestamp":"2025-09-02 16:34:59"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 16:35:47","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 16:35:51"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 16:35:51"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 16:35:51"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 16:35:51"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 16:36:12","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 16:36:14"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 16:36:14"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 16:36:14"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 16:36:14"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 16:36:16"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:36:16"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:36:16"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 16:36:16"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:36:17"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:36:17"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:36:17"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:36:17"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:36:17"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:36:17"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:36:17"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:36:17"}
+{"level":"error","message":"Failed to start server: WPPConnect server is not connected","stack":"Error: WPPConnect server is not connected\n    at AutomationService.start (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\services\\automationService.js:34:17)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async AutomationScheduler.start (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\schedulers\\automationScheduler.js:30:7)\n    at async startServer (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\server.js:163:5)","timestamp":"2025-09-02 16:36:19"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 16:37:59","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 16:38:02"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 16:38:02"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 16:38:02"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 16:38:02"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 16:38:23","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 16:38:24"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 16:38:24"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 16:38:24"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 16:38:24"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 16:38:26"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:38:27"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:38:27"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 16:38:27"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:38:27"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:38:27"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:38:27"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:38:27"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:38:27"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:38:27"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:38:27"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:38:27"}
+{"level":"error","message":"Failed to start server: WPPConnect server is not connected","stack":"Error: WPPConnect server is not connected\n    at AutomationService.start (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\services\\automationService.js:34:17)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async AutomationScheduler.start (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\schedulers\\automationScheduler.js:30:7)\n    at async startServer (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\server.js:163:5)","timestamp":"2025-09-02 16:38:29"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 16:43:08","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 16:43:09"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 16:43:09"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 16:43:09"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 16:43:09"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 16:43:12"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:43:12"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:43:12"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 16:43:12"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:43:12"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:43:12"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:43:12"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:43:12"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:43:12"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:43:12"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:43:12"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:43:12"}
+{"level":"info","message":"🤖 Automation scheduler started successfully","timestamp":"2025-09-02 16:43:19"}
+{"level":"info","message":"🚀 Fees Manager Backend Server running on port 3001","timestamp":"2025-09-02 16:43:19"}
+{"level":"info","message":"Environment: production","timestamp":"2025-09-02 16:43:19"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","timestamp":"2025-09-02 16:43:19"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 16:44:06","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 16:44:07"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 16:44:07"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 16:44:07"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 16:44:07"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 16:44:10"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:44:10"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:44:10"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 16:44:10"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:44:10"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:44:10"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:44:10"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:44:10"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:44:10"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:44:10"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:44:10"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:44:10"}
+{"level":"info","message":"🤖 Automation scheduler started successfully","timestamp":"2025-09-02 16:44:16"}
+{"level":"info","message":"🚀 Fees Manager Backend Server running on port 3001","timestamp":"2025-09-02 16:44:16"}
+{"level":"info","message":"Environment: production","timestamp":"2025-09-02 16:44:16"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","timestamp":"2025-09-02 16:44:16"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 16:44:28","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 16:44:30"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 16:44:30"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 16:44:30"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 16:44:30"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 16:44:30","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 16:44:31"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 16:44:31"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 16:44:31"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 16:44:31"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 16:44:32"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:44:32"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:44:32"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 16:44:32"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:44:33"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:44:33"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:44:33"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:44:33"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:44:33"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:44:33"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:44:33"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:44:33"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 16:44:33"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:44:33"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:44:33"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 16:44:33"}
+{"level":"info","message":"🤖 Automation scheduler started successfully","timestamp":"2025-09-02 16:44:39"}
+{"level":"info","message":"🚀 Fees Manager Backend Server running on port 3001","timestamp":"2025-09-02 16:44:39"}
+{"level":"info","message":"Environment: production","timestamp":"2025-09-02 16:44:39"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","timestamp":"2025-09-02 16:44:39"}
+{"level":"info","message":"Received SIGINT. Starting graceful shutdown...","timestamp":"2025-09-02 16:44:42"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 16:48:35","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 16:48:36"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 16:48:36"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 16:48:36"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 16:48:36"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 16:48:39"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:48:39"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:48:39"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 16:48:39"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:48:40"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:48:40"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:48:40"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:48:40"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:48:40"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:48:40"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:48:40"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:48:40"}
+{"level":"error","message":"Failed to start server: WPPConnect server is not connected","stack":"Error: WPPConnect server is not connected\n    at AutomationService.start (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\services\\automationService.js:34:17)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async AutomationScheduler.start (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\schedulers\\automationScheduler.js:30:7)\n    at async startServer (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\server.js:163:5)","timestamp":"2025-09-02 16:48:42"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 16:49:19","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 16:49:21"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 16:49:21"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 16:49:21"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 16:49:21"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 16:49:23"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:49:23"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:49:23"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 16:49:23"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:49:24"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:49:24"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:49:24"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:49:24"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:49:24"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:49:24"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:49:24"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:49:24"}
+{"level":"info","message":"🤖 Automation scheduler started successfully","timestamp":"2025-09-02 16:49:33"}
+{"level":"info","message":"🚀 Fees Manager Backend Server running on port 3001","timestamp":"2025-09-02 16:49:33"}
+{"level":"info","message":"Environment: production","timestamp":"2025-09-02 16:49:33"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","timestamp":"2025-09-02 16:49:33"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 16:49:44","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 16:49:45"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 16:49:45"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 16:49:45"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 16:49:45"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 16:49:47"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:49:47"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:49:47"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 16:49:47"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:49:48"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:49:48"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:49:48"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:49:48"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:49:48"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:49:48"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:49:48"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:49:48"}
+{"level":"info","message":"🤖 Automation scheduler started successfully","timestamp":"2025-09-02 16:49:58"}
+{"level":"info","message":"🚀 Fees Manager Backend Server running on port 3001","timestamp":"2025-09-02 16:49:58"}
+{"level":"info","message":"Environment: production","timestamp":"2025-09-02 16:49:58"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","timestamp":"2025-09-02 16:49:58"}
+{"level":"info","message":"Received SIGINT. Starting graceful shutdown...","timestamp":"2025-09-02 16:49:59"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 16:51:18","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 16:51:19"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 16:51:19"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 16:51:19"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 16:51:19"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 16:51:21"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:51:21"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:51:21"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 16:51:21"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:51:22"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:51:22"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:51:22"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:51:22"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:51:22"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:51:22"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:51:22"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:51:22"}
+{"level":"info","message":"🤖 Automation scheduler started successfully","timestamp":"2025-09-02 16:51:32"}
+{"level":"info","message":"🚀 Fees Manager Backend Server running on port 3001","timestamp":"2025-09-02 16:51:32"}
+{"level":"info","message":"Environment: production","timestamp":"2025-09-02 16:51:32"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","timestamp":"2025-09-02 16:51:32"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 16:53:34","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 16:53:35"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 16:53:35"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 16:53:35"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 16:53:35"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 16:53:37"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:53:37"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:53:37"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 16:53:37"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:53:38"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:53:38"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:53:38"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:53:38"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:53:38"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:53:38"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:53:38"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:53:38"}
+{"level":"info","message":"🤖 Automation scheduler started successfully","timestamp":"2025-09-02 16:53:48"}
+{"level":"info","message":"🚀 Fees Manager Backend Server running on port 3001","timestamp":"2025-09-02 16:53:48"}
+{"level":"info","message":"Environment: production","timestamp":"2025-09-02 16:53:48"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","timestamp":"2025-09-02 16:53:48"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 16:53:51","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 16:53:52"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 16:53:52"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 16:53:52"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 16:53:52"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 16:53:54"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:53:54"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:53:54"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 16:53:54"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:53:55"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:53:55"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:53:55"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:53:55"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:53:55"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:53:55"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:53:55"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:53:55"}
+{"level":"info","message":"🤖 Automation scheduler started successfully","timestamp":"2025-09-02 16:54:05"}
+{"level":"info","message":"🚀 Fees Manager Backend Server running on port 3001","timestamp":"2025-09-02 16:54:05"}
+{"level":"info","message":"Environment: production","timestamp":"2025-09-02 16:54:05"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","timestamp":"2025-09-02 16:54:05"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 16:54:32","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 16:54:33"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 16:54:33"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 16:54:33"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 16:54:33"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 16:54:35"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:54:35"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:54:35"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 16:54:36"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 16:54:46","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 16:54:47"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 16:54:47"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 16:54:47"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 16:54:47"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 16:54:49"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:54:49"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:54:49"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 16:54:49"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:54:50"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:54:50"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:54:50"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:54:50"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:54:50"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:54:50"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:54:50"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:54:50"}
+{"level":"info","message":"🤖 Automation scheduler started successfully","timestamp":"2025-09-02 16:54:59"}
+{"level":"info","message":"🚀 Fees Manager Backend Server running on port 3001","timestamp":"2025-09-02 16:54:59"}
+{"level":"info","message":"Environment: production","timestamp":"2025-09-02 16:54:59"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","timestamp":"2025-09-02 16:54:59"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 16:59:10","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 16:59:11"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 16:59:11"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 16:59:11"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 16:59:11"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 16:59:13"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:59:13"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:59:13"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 16:59:13"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:59:14"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:59:14"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:59:14"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:59:14"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:59:14"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:59:14"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:59:14"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:59:14"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 16:59:16","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 16:59:17"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 16:59:17"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 16:59:17"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 16:59:17"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 16:59:19"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:59:19"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:59:19"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 16:59:19"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:59:20"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:59:20"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:59:20"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:59:20"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:59:20"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:59:20"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:59:20"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:59:20"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 16:59:45","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 16:59:46"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 16:59:46"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 16:59:46"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 16:59:46"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 16:59:49"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:59:49"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:59:49"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 16:59:49"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:59:49"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:59:49"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:59:49"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:59:49"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 16:59:49"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 16:59:49"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 16:59:49"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 16:59:49"}
+{"level":"info","message":"🤖 Automation scheduler started successfully","timestamp":"2025-09-02 16:59:59"}
+{"level":"info","message":"🚀 Fees Manager Backend Server running on port 3001","timestamp":"2025-09-02 16:59:59"}
+{"level":"info","message":"Environment: production","timestamp":"2025-09-02 16:59:59"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","timestamp":"2025-09-02 16:59:59"}
+{"level":"info","message":"[AutomatedAttendanceNotificationsService] Starting daily attendance notification check","timestamp":"2025-09-02 17:00:00"}
+{"level":"error","message":"[AutomatedAttendanceNotificationsService] Failed to get organizations with attendance notifications: Cannot read properties of null (reading 'collection')","stack":"TypeError: Cannot read properties of null (reading 'collection')\n    at AutomatedAttendanceNotificationsService.getOrganizationsWithAttendanceNotifications (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\services\\automatedAttendanceNotificationsService.js:378:33)\n    at AutomatedAttendanceNotificationsService.checkAndSendDailyAttendanceNotifications (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\services\\automatedAttendanceNotificationsService.js:32:40)\n    at cron.schedule.scheduled [as _execution] (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\schedulers\\automationScheduler.js:144:68)\n    at Task.execute (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\task.js:17:25)\n    at ScheduledTask.now (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\scheduled-task.js:38:33)\n    at Scheduler.<anonymous> (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\scheduled-task.js:25:18)\n    at Scheduler.emit (node:events:524:28)\n    at Timeout.matchTime [as _onTimeout] (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\scheduler.js:30:26)\n    at listOnTimeout (node:internal/timers:581:17)\n    at process.processTimers (node:internal/timers:519:7)","timestamp":"2025-09-02 17:00:00"}
+{"level":"info","message":"[AutomatedAttendanceNotificationsService] Daily attendance check completed: 0 notifications sent across 0 organizations","timestamp":"2025-09-02 17:00:00"}
+{"level":"info","message":"[AutomatedFeeNotificationsService] Starting due date reminder check","timestamp":"2025-09-02 17:05:00"}
+{"level":"error","message":"[AutomatedFeeNotificationsService] Failed to get organizations with WhatsApp: Firebase Admin not initialized. Call initializeFirebase() first.","stack":"Error: Firebase Admin not initialized. Call initializeFirebase() first.\n    at getFirestore (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\config\\firebase.js:414:9)\n    at AutomatedFeeNotificationsService.getOrganizationsWithWhatsApp (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\services\\automatedFeeNotificationsService.js:293:18)\n    at AutomatedFeeNotificationsService.checkAndSendDueDateReminders (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\services\\automatedFeeNotificationsService.js:32:40)\n    at cron.schedule.scheduled [as _execution] (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\schedulers\\automationScheduler.js:115:59)\n    at Task.execute (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\task.js:17:25)\n    at ScheduledTask.now (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\scheduled-task.js:38:33)\n    at Scheduler.<anonymous> (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\scheduled-task.js:25:18)\n    at Scheduler.emit (node:events:524:28)\n    at Timeout.matchTime [as _onTimeout] (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\scheduler.js:30:26)\n    at listOnTimeout (node:internal/timers:581:17)","timestamp":"2025-09-02 17:05:00"}
+{"level":"info","message":"[AutomatedFeeNotificationsService] Due date reminder check completed: 0 reminders sent across 0 organizations","timestamp":"2025-09-02 17:05:00"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 17:09:04","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 17:09:05"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 17:09:05"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 17:09:05"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 17:09:05"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 17:09:07"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 17:09:07"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 17:09:07"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 17:09:07"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 17:09:08"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 17:09:08"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 17:09:08"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 17:09:08"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 17:09:08"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 17:09:08"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 17:09:08"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 17:09:08"}
+{"level":"info","message":"🤖 Automation scheduler started successfully","timestamp":"2025-09-02 17:09:16"}
+{"level":"info","message":"🚀 Fees Manager Backend Server running on port 3001","timestamp":"2025-09-02 17:09:16"}
+{"level":"info","message":"Environment: production","timestamp":"2025-09-02 17:09:16"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","timestamp":"2025-09-02 17:09:16"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 17:11:29","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 17:11:30"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 17:11:30"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 17:11:30"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 17:11:30"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 17:11:32"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 17:11:32"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 17:11:32"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 17:11:32"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 17:11:33"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 17:11:33"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 17:11:33"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 17:11:33"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 17:11:33"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 17:11:33"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 17:11:33"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 17:11:33"}
+{"level":"info","message":"🤖 Automation scheduler started successfully","timestamp":"2025-09-02 17:11:43"}
+{"level":"info","message":"🚀 Fees Manager Backend Server running on port 3001","timestamp":"2025-09-02 17:11:43"}
+{"level":"info","message":"Environment: production","timestamp":"2025-09-02 17:11:43"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","timestamp":"2025-09-02 17:11:43"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 17:12:20","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 17:12:21"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 17:12:21"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 17:12:21"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 17:12:21"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 17:12:24"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 17:12:24"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 17:12:24"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 17:12:24"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 17:12:24"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 17:12:24"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 17:12:24"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 17:12:24"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 17:12:24"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 17:12:24"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 17:12:24"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 17:12:24"}
+{"level":"info","message":"🤖 Automation scheduler started successfully","timestamp":"2025-09-02 17:12:34"}
+{"level":"info","message":"🚀 Fees Manager Backend Server running on port 3001","timestamp":"2025-09-02 17:12:34"}
+{"level":"info","message":"Environment: production","timestamp":"2025-09-02 17:12:34"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","timestamp":"2025-09-02 17:12:34"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 17:12:44","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 17:12:46"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 17:12:46"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 17:12:46"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 17:12:46"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 17:12:48"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 17:12:48"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 17:12:48"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 17:12:48"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 17:12:49"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 17:12:49"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 17:12:49"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 17:12:49"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 17:12:49"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 17:12:49"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 17:12:49"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 17:12:49"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 17:12:59","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 17:13:01"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 17:13:01"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 17:13:01"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 17:13:01"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 17:13:03"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 17:13:03"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 17:13:03"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 17:13:03"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 17:13:48","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 17:13:49"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 17:13:49"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 17:13:49"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 17:13:49"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 17:13:51"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 17:13:51"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 17:13:51"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 17:13:51"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 17:13:52"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 17:13:52"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 17:13:52"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 17:13:52"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 17:13:52"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 17:13:52"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 17:13:52"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 17:13:52"}
+{"level":"info","message":"🤖 Automation scheduler started successfully","timestamp":"2025-09-02 17:14:01"}
+{"level":"info","message":"🚀 Fees Manager Backend Server running on port 3001","timestamp":"2025-09-02 17:14:01"}
+{"level":"info","message":"Environment: production","timestamp":"2025-09-02 17:14:01"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","timestamp":"2025-09-02 17:14:01"}
+{"level":"info","message":"[AutomatedAttendanceNotificationsService] Starting daily attendance notification check","timestamp":"2025-09-02 17:15:00"}
+{"level":"error","message":"[AutomatedAttendanceNotificationsService] Failed to get organizations with attendance notifications: Cannot read properties of null (reading 'collection')","stack":"TypeError: Cannot read properties of null (reading 'collection')\n    at AutomatedAttendanceNotificationsService.getOrganizationsWithAttendanceNotifications (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\services\\automatedAttendanceNotificationsService.js:378:33)\n    at AutomatedAttendanceNotificationsService.checkAndSendDailyAttendanceNotifications (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\services\\automatedAttendanceNotificationsService.js:32:40)\n    at cron.schedule.scheduled [as _execution] (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\schedulers\\automationScheduler.js:144:68)\n    at Task.execute (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\task.js:17:25)\n    at ScheduledTask.now (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\scheduled-task.js:38:33)\n    at Scheduler.<anonymous> (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\scheduled-task.js:25:18)\n    at Scheduler.emit (node:events:524:28)\n    at Timeout.matchTime [as _onTimeout] (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\scheduler.js:30:26)\n    at listOnTimeout (node:internal/timers:581:17)\n    at process.processTimers (node:internal/timers:519:7)","timestamp":"2025-09-02 17:15:00"}
+{"level":"info","message":"[AutomatedAttendanceNotificationsService] Daily attendance check completed: 0 notifications sent across 0 organizations","timestamp":"2025-09-02 17:15:00"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 17:25:51","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 17:25:53"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 17:25:53"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 17:25:53"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 17:25:53"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 17:25:55"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 17:25:55"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 17:25:55"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 17:25:55"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 17:25:56"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 17:25:56"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 17:25:56"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 17:25:56"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 17:25:56"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 17:25:56"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 17:25:56"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 17:25:56"}
+{"level":"info","message":"🤖 Automation scheduler started successfully","timestamp":"2025-09-02 17:26:05"}
+{"level":"info","message":"🚀 Fees Manager Backend Server running on port 3001","timestamp":"2025-09-02 17:26:05"}
+{"level":"info","message":"Environment: production","timestamp":"2025-09-02 17:26:05"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","timestamp":"2025-09-02 17:26:05"}
+{"level":"info","message":"[AutomatedAttendanceNotificationsService] Starting daily attendance notification check","timestamp":"2025-09-02 17:30:00"}
+{"level":"error","message":"[AutomatedAttendanceNotificationsService] Failed to get organizations with attendance notifications: Cannot read properties of null (reading 'collection')","stack":"TypeError: Cannot read properties of null (reading 'collection')\n    at AutomatedAttendanceNotificationsService.getOrganizationsWithAttendanceNotifications (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\services\\automatedAttendanceNotificationsService.js:378:33)\n    at AutomatedAttendanceNotificationsService.checkAndSendDailyAttendanceNotifications (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\services\\automatedAttendanceNotificationsService.js:32:40)\n    at cron.schedule.scheduled [as _execution] (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\schedulers\\automationScheduler.js:144:68)\n    at Task.execute (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\task.js:17:25)\n    at ScheduledTask.now (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\scheduled-task.js:38:33)\n    at Scheduler.<anonymous> (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\scheduled-task.js:25:18)\n    at Scheduler.emit (node:events:524:28)\n    at Timeout.matchTime [as _onTimeout] (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\scheduler.js:30:26)\n    at listOnTimeout (node:internal/timers:581:17)\n    at process.processTimers (node:internal/timers:519:7)","timestamp":"2025-09-02 17:30:00"}
+{"level":"info","message":"[AutomatedAttendanceNotificationsService] Daily attendance check completed: 0 notifications sent across 0 organizations","timestamp":"2025-09-02 17:30:00"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 17:35:12","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 17:35:14"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 17:35:14"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 17:35:14"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 17:35:14"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 17:35:16"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 17:35:16"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 17:35:16"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 17:35:16"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 18:00:31","transports":4}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 18:00:53","transports":4}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 18:00:38","transports":4}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 18:01:37"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 18:01:37"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 18:01:37"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 18:01:37"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 18:01:37"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 18:01:37"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 18:01:37"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 18:01:37"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 18:01:40","transports":4}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 18:00:31","transports":4}
+{"level":"info","message":"[WhatsAppService] Initializing WhatsApp service for organization: org_123","timestamp":"2025-09-02 18:00:31"}
+{"level":"info","message":"[WhatsAppService] Created session for organization: org_123","timestamp":"2025-09-02 18:00:31"}
+{"level":"info","message":"[WhatsAppService] Updated session status for organization org_123: connected","timestamp":"2025-09-02 18:00:31"}
+{"level":"info","message":"[WhatsAppService] Initializing WhatsApp service for organization: org_123","timestamp":"2025-09-02 18:00:32"}
+{"level":"warn","message":"[WhatsAppService] WhatsApp not enabled for organization: org_123","timestamp":"2025-09-02 18:00:32"}
+{"level":"info","message":"[WhatsAppService] Initializing WhatsApp service for organization: org_123","timestamp":"2025-09-02 18:00:32"}
+{"level":"info","message":"[WhatsAppService] Using existing session for organization: org_123","timestamp":"2025-09-02 18:00:32"}
+{"level":"info","message":"[WhatsAppService] Initializing WhatsApp service for organization: org_123","timestamp":"2025-09-02 18:00:32"}
+{"level":"error","message":"[WhatsAppService] WPPConnect server not available for organization: org_123","timestamp":"2025-09-02 18:00:32"}
+{"level":"info","message":"[WhatsAppService] Initializing WhatsApp service for organization: org_123","timestamp":"2025-09-02 18:00:32"}
+{"level":"warn","message":"[WhatsAppService] WhatsApp not enabled for organization: org_123","timestamp":"2025-09-02 18:00:32"}
+{"level":"info","message":"[WhatsAppService] Sending message for organization org_123 to +1234567890","timestamp":"2025-09-02 18:00:32"}
+{"level":"info","message":"[WhatsAppService] Message sent successfully for organization org_123","timestamp":"2025-09-02 18:00:32"}
+{"level":"info","message":"[WhatsAppService] Sending message for organization org_123 to +1234567890","timestamp":"2025-09-02 18:00:32"}
+{"level":"error","message":"[WhatsAppService] Failed to send message for organization org_123: Send failed","stack":"Error: Send failed\n    at Object.<anonymous> (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\tests\\whatsapp.test.js:147:72)\n    at Promise.then.completed (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\jest-circus@29.7.0\\node_modules\\jest-circus\\build\\utils.js:298:28)\n    at new Promise (<anonymous>)\n    at callAsyncCircusFn (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\jest-circus@29.7.0\\node_modules\\jest-circus\\build\\utils.js:231:10)\n    at _callCircusTest (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\jest-circus@29.7.0\\node_modules\\jest-circus\\build\\run.js:316:40)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at _runTest (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\jest-circus@29.7.0\\node_modules\\jest-circus\\build\\run.js:252:3)\n    at _runTestsForDescribeBlock (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\jest-circus@29.7.0\\node_modules\\jest-circus\\build\\run.js:126:9)\n    at _runTestsForDescribeBlock (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\jest-circus@29.7.0\\node_modules\\jest-circus\\build\\run.js:121:9)\n    at _runTestsForDescribeBlock (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\jest-circus@29.7.0\\node_modules\\jest-circus\\build\\run.js:121:9)\n    at run (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\jest-circus@29.7.0\\node_modules\\jest-circus\\build\\run.js:71:3)\n    at runAndTransformResultsToJestFormat (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\jest-circus@29.7.0\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapterInit.js:122:21)\n    at jestAdapter (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\jest-circus@29.7.0\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:79:19)\n    at runTestInternal (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\jest-runner@29.7.0\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n    at runTest (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\jest-runner@29.7.0\\node_modules\\jest-runner\\build\\runTest.js:444:34)\n    at Object.worker (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\jest-runner@29.7.0\\node_modules\\jest-runner\\build\\testWorker.js:106:12)","timestamp":"2025-09-02 18:00:32"}
+{"level":"info","message":"[WhatsAppService] Sending message for organization org_123 to +1234567890","timestamp":"2025-09-02 18:00:32"}
+{"level":"warn","message":"[WhatsAppService] No session found for organization: org_123","timestamp":"2025-09-02 18:00:32"}
+{"level":"info","message":"[WhatsAppService] Message sent successfully for organization org_123","timestamp":"2025-09-02 18:00:32"}
+{"level":"info","message":"[WhatsAppService] Attempting reconnection for organization: org_123 (attempt 1)","timestamp":"2025-09-02 18:00:32"}
+{"level":"error","message":"[WhatsAppService] Max reconnection attempts reached for organization: org_123","timestamp":"2025-09-02 18:00:33"}
+{"level":"info","message":"[WhatsAppService] Attempting reconnection for organization: org_123 (attempt 1)","timestamp":"2025-09-02 18:00:33"}
+{"level":"error","message":"[WhatsAppService] Health check failed: Health check failed","stack":"Error: Health check failed\n    at Object.<anonymous> (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\tests\\whatsapp.test.js:268:67)\n    at Promise.then.completed (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\jest-circus@29.7.0\\node_modules\\jest-circus\\build\\utils.js:298:28)\n    at new Promise (<anonymous>)\n    at callAsyncCircusFn (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\jest-circus@29.7.0\\node_modules\\jest-circus\\build\\utils.js:231:10)\n    at _callCircusTest (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\jest-circus@29.7.0\\node_modules\\jest-circus\\build\\run.js:316:40)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at _runTest (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\jest-circus@29.7.0\\node_modules\\jest-circus\\build\\run.js:252:3)\n    at _runTestsForDescribeBlock (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\jest-circus@29.7.0\\node_modules\\jest-circus\\build\\run.js:126:9)\n    at _runTestsForDescribeBlock (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\jest-circus@29.7.0\\node_modules\\jest-circus\\build\\run.js:121:9)\n    at _runTestsForDescribeBlock (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\jest-circus@29.7.0\\node_modules\\jest-circus\\build\\run.js:121:9)\n    at run (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\jest-circus@29.7.0\\node_modules\\jest-circus\\build\\run.js:71:3)\n    at runAndTransformResultsToJestFormat (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\jest-circus@29.7.0\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapterInit.js:122:21)\n    at jestAdapter (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\jest-circus@29.7.0\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:79:19)\n    at runTestInternal (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\jest-runner@29.7.0\\node_modules\\jest-runner\\build\\runTest.js:367:16)\n    at runTest (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\jest-runner@29.7.0\\node_modules\\jest-runner\\build\\runTest.js:444:34)\n    at Object.worker (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\jest-runner@29.7.0\\node_modules\\jest-runner\\build\\testWorker.js:106:12)","timestamp":"2025-09-02 18:00:33"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 18:00:48","transports":4}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 18:01:56"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 18:01:56"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 18:01:56"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 18:01:56"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 18:01:48"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 18:01:48"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 18:01:48"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 18:01:48"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 18:01:48"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 18:01:48"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 18:01:48"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 18:01:41","transports":4}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 18:01:56"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 18:01:56"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 18:01:56"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 18:01:56"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 18:01:51","transports":4}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 18:01:40","transports":4}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 18:01:57"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 18:01:57"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 18:01:57"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 18:01:57"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 18:01:57"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 18:01:57"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 18:01:57"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 18:01:51","transports":4}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 18:01:58"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 18:01:58"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 18:01:58"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 18:01:58"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 18:01:58"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 18:01:58"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 18:01:58"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 18:01:58"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 18:02:47","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 18:02:51"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 18:02:51"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 18:02:51"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 18:02:51"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 18:02:53"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 18:02:53"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 18:02:53"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 18:02:53"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 18:02:54"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 18:02:54"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 18:02:54"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 18:02:54"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 18:02:54"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 18:02:54"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 18:02:54"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 18:02:54"}
+{"level":"info","message":"🤖 Automation scheduler started successfully","timestamp":"2025-09-02 18:03:03"}
+{"level":"info","message":"🚀 Fees Manager Backend Server running on port 3001","timestamp":"2025-09-02 18:03:03"}
+{"level":"info","message":"Environment: production","timestamp":"2025-09-02 18:03:03"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","timestamp":"2025-09-02 18:03:03"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 18:03:51","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 18:03:58"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 18:03:58"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 18:03:58"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 18:03:58"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 18:04:00"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 18:04:00"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 18:04:00"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 18:04:00"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 18:04:01"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 18:04:01"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 18:04:01"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 18:04:01"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 18:04:01"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 18:04:01"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 18:04:01"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 18:04:01"}
+{"level":"info","message":"🤖 Automation scheduler started successfully","timestamp":"2025-09-02 18:04:12"}
+{"level":"info","message":"🚀 Fees Manager Backend Server running on port 3001","timestamp":"2025-09-02 18:04:12"}
+{"level":"info","message":"Environment: production","timestamp":"2025-09-02 18:04:12"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","timestamp":"2025-09-02 18:04:12"}
+{"level":"info","message":"[AutomatedFeeNotificationsService] Starting due date reminder check","timestamp":"2025-09-02 18:05:01"}
+{"level":"error","message":"[AutomatedFeeNotificationsService] Failed to get organizations with WhatsApp: Firebase Admin not initialized. Call initializeFirebase() first.","stack":"Error: Firebase Admin not initialized. Call initializeFirebase() first.\n    at getFirestore (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\config\\firebase.js:414:9)\n    at AutomatedFeeNotificationsService.getOrganizationsWithWhatsApp (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\services\\automatedFeeNotificationsService.js:293:18)\n    at AutomatedFeeNotificationsService.checkAndSendDueDateReminders (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\services\\automatedFeeNotificationsService.js:32:40)\n    at cron.schedule.scheduled [as _execution] (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\schedulers\\automationScheduler.js:115:59)\n    at Task.execute (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\task.js:17:25)\n    at ScheduledTask.now (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\scheduled-task.js:38:33)\n    at Scheduler.<anonymous> (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\scheduled-task.js:25:18)\n    at Scheduler.emit (node:events:524:28)\n    at Timeout.matchTime [as _onTimeout] (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\scheduler.js:30:26)\n    at listOnTimeout (node:internal/timers:581:17)","timestamp":"2025-09-02 18:05:01"}
+{"level":"info","message":"[AutomatedFeeNotificationsService] Due date reminder check completed: 0 reminders sent across 0 organizations","timestamp":"2025-09-02 18:05:01"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 18:10:40","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 18:10:52"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 18:10:52"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 18:10:52"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 18:10:52"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 18:10:53"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 18:10:53"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 18:10:53"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 18:10:53"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 18:10:55"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 18:10:55"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 18:10:55"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 18:10:55"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 18:10:55"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 18:10:55"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 18:10:55"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 18:10:55"}
+{"level":"info","message":"🤖 Automation scheduler started successfully","timestamp":"2025-09-02 18:11:04"}
+{"level":"info","message":"🚀 Fees Manager Backend Server running on port 3001","timestamp":"2025-09-02 18:11:04"}
+{"level":"info","message":"Environment: production","timestamp":"2025-09-02 18:11:04"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","timestamp":"2025-09-02 18:11:04"}
+{"level":"info","message":"[AutomatedAttendanceNotificationsService] Starting daily attendance notification check","timestamp":"2025-09-02 18:15:00"}
+{"level":"error","message":"[AutomatedAttendanceNotificationsService] Failed to get organizations with attendance notifications: Cannot read properties of null (reading 'collection')","stack":"TypeError: Cannot read properties of null (reading 'collection')\n    at AutomatedAttendanceNotificationsService.getOrganizationsWithAttendanceNotifications (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\services\\automatedAttendanceNotificationsService.js:378:33)\n    at AutomatedAttendanceNotificationsService.checkAndSendDailyAttendanceNotifications (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\services\\automatedAttendanceNotificationsService.js:32:40)\n    at cron.schedule.scheduled [as _execution] (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\schedulers\\automationScheduler.js:144:68)\n    at Task.execute (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\task.js:17:25)\n    at ScheduledTask.now (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\scheduled-task.js:38:33)\n    at Scheduler.<anonymous> (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\scheduled-task.js:25:18)\n    at Scheduler.emit (node:events:524:28)\n    at Timeout.matchTime [as _onTimeout] (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\scheduler.js:30:26)\n    at listOnTimeout (node:internal/timers:581:17)\n    at process.processTimers (node:internal/timers:519:7)","timestamp":"2025-09-02 18:15:00"}
+{"level":"info","message":"[AutomatedAttendanceNotificationsService] Daily attendance check completed: 0 notifications sent across 0 organizations","timestamp":"2025-09-02 18:15:00"}
+{"level":"error","message":"[EnhancedMessageQueueService] Cleanup job failed: this.client.keys is not a function","stack":"TypeError: this.client.keys is not a function\n    at Timeout._onTimeout (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\services\\enhancedMessageQueueService.js:587:40)\n    at listOnTimeout (node:internal/timers:581:17)\n    at process.processTimers (node:internal/timers:519:7)","timestamp":"2025-09-02 20:49:19"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 20:52:15","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 20:52:17"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 20:52:17"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 20:52:17"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 20:52:17"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 20:52:19"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 20:52:19"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 20:52:19"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 20:52:19"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 20:52:20"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 20:52:20"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 20:52:20"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 20:52:20"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 20:52:20"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 20:52:20"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 20:52:20"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 20:52:20"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 20:52:26","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 20:52:28"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 20:52:28"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 20:52:28"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 20:52:28"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 20:52:30"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 20:52:30"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 20:52:30"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 20:52:30"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 20:52:31"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 20:52:31"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 20:52:31"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 20:52:31"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 20:52:31"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 20:52:31"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 20:52:31"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 20:52:31"}
+{"level":"info","message":"🤖 Automation scheduler started successfully","timestamp":"2025-09-02 20:52:40"}
+{"level":"info","message":"🚀 Fees Manager Backend Server running on port 3001","timestamp":"2025-09-02 20:52:40"}
+{"level":"info","message":"Environment: production","timestamp":"2025-09-02 20:52:40"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","timestamp":"2025-09-02 20:52:40"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 20:52:41","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 20:52:43"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 20:52:43"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 20:52:43"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 20:52:43"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 20:52:45"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 20:52:45"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 20:52:45"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 20:52:45"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 20:52:46"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 20:52:46"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 20:52:46"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 20:52:46"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 20:52:46"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 20:52:46"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 20:52:46"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 20:52:46"}
+{"level":"info","message":"🤖 Automation scheduler started successfully","timestamp":"2025-09-02 20:52:55"}
+{"level":"info","message":"🚀 Fees Manager Backend Server running on port 3001","timestamp":"2025-09-02 20:52:55"}
+{"level":"info","message":"Environment: production","timestamp":"2025-09-02 20:52:55"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","timestamp":"2025-09-02 20:52:55"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 20:53:10","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 20:53:11"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 20:53:11"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 20:53:11"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 20:53:11"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 20:53:13"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 20:53:13"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 20:53:13"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 20:53:13"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 20:53:14"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 20:53:14"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 20:53:14"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 20:53:14"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 20:53:14"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 20:53:14"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 20:53:14"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 20:53:14"}
+{"level":"info","message":"🤖 Automation scheduler started successfully","timestamp":"2025-09-02 20:53:24"}
+{"level":"info","message":"🚀 Fees Manager Backend Server running on port 3001","timestamp":"2025-09-02 20:53:24"}
+{"level":"info","message":"Environment: production","timestamp":"2025-09-02 20:53:24"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","timestamp":"2025-09-02 20:53:24"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 20:54:32","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 20:54:33"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 20:54:33"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 20:54:33"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 20:54:33"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 20:54:35"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 20:54:35"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 20:54:35"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 20:54:35"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 20:54:36"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 20:54:36"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 20:54:36"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 20:54:36"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 20:54:36"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 20:54:36"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 20:54:36"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 20:54:36"}
+{"level":"info","message":"🤖 Automation scheduler started successfully","timestamp":"2025-09-02 20:54:47"}
+{"level":"info","message":"🚀 Fees Manager Backend Server running on port 3001","timestamp":"2025-09-02 20:54:47"}
+{"level":"info","message":"Environment: production","timestamp":"2025-09-02 20:54:47"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","timestamp":"2025-09-02 20:54:47"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 20:54:47","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 20:54:49"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 20:54:49"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 20:54:49"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 20:54:49"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 20:54:51"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 20:54:51"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 20:54:51"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 20:54:51"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 20:54:52"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 20:54:52"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 20:54:52"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 20:54:52"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 20:54:52"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 20:54:52"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 20:54:52"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 20:54:52"}
+{"level":"info","message":"🤖 Automation scheduler started successfully","timestamp":"2025-09-02 20:55:01"}
+{"level":"info","message":"[AutomatedFeeNotificationsService] Starting due date reminder check","timestamp":"2025-09-02 21:05:00"}
+{"level":"error","message":"[AutomatedFeeNotificationsService] Failed to get organizations with WhatsApp: Firebase Admin not initialized. Call initializeFirebase() first.","stack":"Error: Firebase Admin not initialized. Call initializeFirebase() first.\n    at getFirestore (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\config\\firebase.js:414:9)\n    at AutomatedFeeNotificationsService.getOrganizationsWithWhatsApp (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\services\\automatedFeeNotificationsService.js:293:18)\n    at AutomatedFeeNotificationsService.checkAndSendDueDateReminders (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\services\\automatedFeeNotificationsService.js:32:40)\n    at cron.schedule.scheduled [as _execution] (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\schedulers\\automationScheduler.js:115:59)\n    at Task.execute (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\task.js:17:25)\n    at ScheduledTask.now (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\scheduled-task.js:38:33)\n    at Scheduler.<anonymous> (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\scheduled-task.js:25:18)\n    at Scheduler.emit (node:events:524:28)\n    at Timeout.matchTime [as _onTimeout] (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\scheduler.js:30:26)\n    at listOnTimeout (node:internal/timers:581:17)","timestamp":"2025-09-02 21:05:00"}
+{"level":"info","message":"[AutomatedFeeNotificationsService] Due date reminder check completed: 0 reminders sent across 0 organizations","timestamp":"2025-09-02 21:05:00"}
+{"level":"info","message":"🚀 Logger initialized","timestamp":"2025-09-02 21:09:08","transports":3}
+{"level":"info","message":"Firebase initialized successfully","timestamp":"2025-09-02 21:09:10"}
+{"level":"info","message":"[GlobalTimeConfig] Time configuration initialized successfully","timestamp":"2025-09-02 21:09:10"}
+{"level":"info","message":"Global Time Configuration Service initialized","timestamp":"2025-09-02 21:09:10"}
+{"level":"info","message":"📱 Redis disabled in development, using in-memory fallbacks","timestamp":"2025-09-02 21:09:10"}
+{"level":"error","message":"❌ Redis Client Error:","timestamp":"2025-09-02 21:09:12"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 21:09:12"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 21:09:12"}
+{"level":"info","message":"✅ Enhanced Message Queue connected to Redis successfully","timestamp":"2025-09-02 21:09:12"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 21:09:13"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 21:09:13"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 21:09:13"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 21:09:13"}
+{"level":"warn","message":"⚠️ Failed to connect to Redis: Redis connection timeout","timestamp":"2025-09-02 21:09:13"}
+{"level":"info","message":"🔄 Falling back to in-memory queue service...","timestamp":"2025-09-02 21:09:13"}
+{"level":"info","message":"[InMemoryQueueService] Using in-memory queue (Redis not available)","timestamp":"2025-09-02 21:09:13"}
+{"level":"info","message":"✅ Enhanced Message Queue using in-memory fallback","timestamp":"2025-09-02 21:09:13"}
+{"level":"info","message":"🤖 Automation scheduler started successfully","timestamp":"2025-09-02 21:09:23"}
+{"level":"info","message":"🚀 Fees Manager Backend Server running on port 3001","timestamp":"2025-09-02 21:09:23"}
+{"level":"info","message":"Environment: production","timestamp":"2025-09-02 21:09:23"}
+{"level":"info","message":"Health check: http://localhost:3001/api/health","timestamp":"2025-09-02 21:09:23"}
+{"level":"info","message":"[AutomatedFeeNotificationsService] Starting due date reminder check","timestamp":"2025-09-02 22:05:00"}
+{"level":"error","message":"[AutomatedFeeNotificationsService] Failed to get organizations with WhatsApp: Firebase Admin not initialized. Call initializeFirebase() first.","stack":"Error: Firebase Admin not initialized. Call initializeFirebase() first.\n    at getFirestore (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\config\\firebase.js:414:9)\n    at AutomatedFeeNotificationsService.getOrganizationsWithWhatsApp (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\services\\automatedFeeNotificationsService.js:293:18)\n    at AutomatedFeeNotificationsService.checkAndSendDueDateReminders (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\services\\automatedFeeNotificationsService.js:32:40)\n    at cron.schedule.scheduled [as _execution] (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\schedulers\\automationScheduler.js:115:59)\n    at Task.execute (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\task.js:17:25)\n    at ScheduledTask.now (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\scheduled-task.js:38:33)\n    at Scheduler.<anonymous> (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\scheduled-task.js:25:18)\n    at Scheduler.emit (node:events:524:28)\n    at Timeout.matchTime [as _onTimeout] (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\node_modules\\.pnpm\\node-cron@3.0.3\\node_modules\\node-cron\\src\\scheduler.js:30:26)\n    at listOnTimeout (node:internal/timers:581:17)","timestamp":"2025-09-02 22:05:00"}
+{"level":"info","message":"[AutomatedFeeNotificationsService] Due date reminder check completed: 0 reminders sent across 0 organizations","timestamp":"2025-09-02 22:05:00"}
+{"level":"error","message":"[EnhancedMessageQueueService] Cleanup job failed: this.client.keys is not a function","stack":"TypeError: this.client.keys is not a function\n    at Timeout._onTimeout (D:\\NEW TOOLS\\fees-manager-wpp.sprinthon.com\\fees-manager-automation\\src\\services\\enhancedMessageQueueService.js:587:40)\n    at listOnTimeout (node:internal/timers:581:17)\n    at process.processTimers (node:internal/timers:519:7)","timestamp":"2025-09-02 22:09:12"}

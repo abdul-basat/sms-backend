@@ -33,7 +33,7 @@ class GlobalTimeConfigService {
       },
       automationRules: {
         inheritBusinessHours: true,
-        gracePeriodMinutes: 2,
+        gracePeriodMinutes: 10, // Increased from 2 to 10 minutes for better rule execution
         maxExecutionDelay: 300000 // 5 minutes max delay
       }
     };

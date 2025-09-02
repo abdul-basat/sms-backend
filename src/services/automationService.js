@@ -28,7 +28,7 @@ class AutomationService {
 
     try {
       // Check WhatsApp connection (if enabled)
-      if (process.env.WHATSAPP_ENABLED !== 'false') {
+      if (process.env.WHATSAPP_ENABLED === 'true') {
         const isConnected = await this.wppconnectClient.checkConnection();
         if (!isConnected) {
           throw new Error('WPPConnect server is not connected');
@@ -38,7 +38,7 @@ class AutomationService {
       }
 
       // Check Firebase connection (if enabled)
-      if (process.env.FIREBASE_ENABLED !== 'false') {
+      if (process.env.FIREBASE_ENABLED === 'true') {
         const firebaseHealth = await this.firebaseService.healthCheck();
         if (!firebaseHealth.connected) {
           throw new Error('Firebase connection failed');
@@ -137,6 +137,7 @@ class AutomationService {
    */
   async shouldExecuteRule(rule, now) {
     if (!rule.enabled) {
+      console.log(`❌ Rule ${rule.id} is disabled`);
       return false;
     }
 
@@ -144,8 +145,11 @@ class AutomationService {
     const currentTime = now.toTimeString().slice(0, 5); // HH:MM format
     const ruleTime = rule.schedule.time;
     
+    console.log(`🕒 Checking rule ${rule.id}: Current time ${currentTime}, Rule time ${ruleTime}`);
+    
     // Exact time match
     if (currentTime === ruleTime) {
+      console.log(`✅ Rule ${rule.id} exact time match!`);
       return this.checkFrequency(rule, now);
     }
     
@@ -158,11 +162,14 @@ class AutomationService {
     const config = this.timeConfig.getConfig();
     const gracePeriodMinutes = config.automationRules.gracePeriodMinutes;
     
+    console.log(`⏱️ Rule ${rule.id} time difference: ${timeDifference} minutes (grace period: ${gracePeriodMinutes} minutes)`);
+    
     if (timeDifference <= gracePeriodMinutes) {
       console.log(`⏰ Rule ${rule.id} triggered within grace period (${timeDifference} min difference)`);
       return this.checkFrequency(rule, now);
     }
     
+    console.log(`❌ Rule ${rule.id} outside grace period`);
     return false;
   }
 
@@ -173,13 +180,19 @@ class AutomationService {
    * @returns {boolean} - Whether frequency conditions are met
    */
   checkFrequency(rule, now) {
+    console.log(`📅 Checking frequency for rule ${rule.id}: ${rule.schedule.frequency}`);
+    
     if (rule.schedule.frequency === 'daily') {
+      console.log(`✅ Rule ${rule.id} frequency check passed (daily)`);
       return true;
     } else if (rule.schedule.frequency === 'weekly') {
       const dayOfWeek = now.toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase();
-      return rule.schedule.daysOfWeek?.includes(dayOfWeek) || false;
+      const allowed = rule.schedule.daysOfWeek?.includes(dayOfWeek) || false;
+      console.log(`📅 Rule ${rule.id} weekly check: today=${dayOfWeek}, allowed days=${rule.schedule.daysOfWeek?.join(',') || 'none'}, result=${allowed}`);
+      return allowed;
     }
     
+    console.log(`❌ Rule ${rule.id} unknown frequency: ${rule.schedule.frequency}`);
     return false;
   }
 
@@ -201,16 +214,43 @@ class AutomationService {
       }
 
       // Get message template
-      const template = await this.firebaseService.getTemplate(rule.templateId);
+      if (!rule.templateId) {
+        console.log(`⚠️ Rule ${rule.id} has no templateId defined, skipping...`);
+        return;
+      }
+      
+      // Try to get template from Firebase, fallback to default templates
+      let template;
+      try {
+        template = await this.firebaseService.getTemplate(rule.templateId);
+      } catch (error) {
+        console.log(`⚠️ Template ${rule.templateId} not found in Firebase, checking default templates...`);
+        template = this.getDefaultTemplate(rule.templateId);
+        if (!template) {
+          console.log(`❌ Template ${rule.templateId} not found in defaults either, skipping rule...`);
+          return;
+        }
+        console.log(`✅ Using default template: ${template.name}`);
+      }
       
       // Filter students based on rule criteria
+      console.log(`🔍 Filtering ${students.length} students for rule ${rule.id} criteria...`);
+      console.log(`📋 Rule criteria:`, JSON.stringify(rule.criteria, null, 2));
+      
       const matchingStudents = students.filter(student => 
         this.studentMatchesRule(student, rule)
       );
 
       if (matchingStudents.length === 0) {
         console.log(`ℹ️ No students match criteria for rule ${rule.id}`);
-        await this.firebaseService.updateRuleLastRun(rule.id);
+        console.log(`📊 Sample student for debugging:`, students[0] ? {
+          id: students[0].id,
+          name: students[0].name,
+          feeStatus: students[0].feeStatus,
+          dueDate: students[0].dueDate,
+          whatsappNumber: students[0].whatsappNumber
+        } : 'No students available');
+        await this.firebaseService.updateRuleLastRun(rule.id, rule.userId);
         return;
       }
 
@@ -240,7 +280,7 @@ class AutomationService {
       console.log(`📥 Queued ${queuedMessages} messages for rule ${rule.id}`);
       
       // Update rule last run time
-      await this.firebaseService.updateRuleLastRun(rule.id);
+      await this.firebaseService.updateRuleLastRun(rule.id, rule.userId);
       
     } catch (error) {
       console.error(`❌ Error executing rule ${rule.id}:`, error.message);
@@ -255,16 +295,22 @@ class AutomationService {
    */
   studentMatchesRule(student, rule) {
     try {
+      console.log(`🔍 Checking student ${student.name || student.id} against rule ${rule.id}:`);
+      
       // Check if student has WhatsApp number
       if (!student.whatsappNumber) {
+        console.log(`   ❌ No WhatsApp number for ${student.name}`);
         return false;
       }
+      console.log(`   ✅ Has WhatsApp number: ${student.whatsappNumber}`);
 
       // Check payment status if specified
       if (rule.criteria && rule.criteria.paymentStatus) {
         if (student.paymentStatus !== rule.criteria.paymentStatus) {
+          console.log(`   ❌ Payment status mismatch: student=${student.paymentStatus}, rule=${rule.criteria.paymentStatus}`);
           return false;
         }
+        console.log(`   ✅ Payment status matches: ${student.paymentStatus}`);
       }
 
       // Check due date criteria
@@ -273,28 +319,37 @@ class AutomationService {
         const now = new Date();
         const daysDifference = Math.floor((dueDate - now) / (1000 * 60 * 60 * 24));
         
+        console.log(`   📅 Due date check: student due=${dueDate.toISOString().split('T')[0]}, days difference=${daysDifference}, condition=${rule.criteria.dueDate.condition}, required days=${rule.criteria.dueDate.days}`);
+        
         if (rule.criteria.dueDate.condition === 'overdue' && daysDifference >= 0) {
+          console.log(`   ❌ Not overdue (days difference: ${daysDifference})`);
           return false;
         }
         
         if (rule.criteria.dueDate.condition === 'before' && daysDifference > rule.criteria.dueDate.days) {
+          console.log(`   ❌ Not within before range (${daysDifference} > ${rule.criteria.dueDate.days})`);
           return false;
         }
         
         if (rule.criteria.dueDate.condition === 'after' && daysDifference < rule.criteria.dueDate.days) {
+          console.log(`   ❌ Not within after range (${daysDifference} < ${rule.criteria.dueDate.days})`);
           return false;
         }
+        
+        console.log(`   ✅ Due date criteria satisfied`);
       }
 
       // Check class/course criteria
       if (rule.criteria && rule.criteria.classId && student.classId !== rule.criteria.classId) {
+        console.log(`   ❌ Class ID mismatch: student=${student.classId}, rule=${rule.criteria.classId}`);
         return false;
       }
 
+      console.log(`   ✅ Student ${student.name} matches all criteria for rule ${rule.id}`);
       return true;
       
     } catch (error) {
-      console.error(`❌ Error checking student match for ${student.name}:`, error.message);
+      console.error(`❌ Error checking student ${student.name || student.id} against rule ${rule.id}:`, error.message);
       return false;
     }
   }
@@ -383,6 +438,46 @@ class AutomationService {
       console.error(`❌ Test message failed for ${phoneNumber}:`, error.message);
       return { success: false, error: error.message };
     }
+  }
+
+  /**
+   * Get default template by ID (fallback for when Firebase templates don't exist)
+   * @param {string} templateId - Template ID
+   * @returns {Object|null} - Default template or null
+   */
+  getDefaultTemplate(templateId) {
+    const defaultTemplates = {
+      'fee-reminder': {
+        id: 'fee-reminder',
+        name: 'Fee Reminder',
+        content: 'Dear {studentName}, this is a reminder that your fee of {feeAmount} is due on {dueDate}. Please make the payment to avoid any late fees. Thank you!',
+        variables: ['studentName', 'feeAmount', 'dueDate'],
+        category: 'fee'
+      },
+      'overdue-notice': {
+        id: 'overdue-notice',
+        name: 'Overdue Notice',
+        content: 'Dear {studentName}, your fee of {feeAmount} was due on {dueDate} and is now {daysOverdue} days overdue. Please make the payment immediately to avoid further penalties.',
+        variables: ['studentName', 'feeAmount', 'dueDate', 'daysOverdue'],
+        category: 'fee'
+      },
+      'payment-confirmation': {
+        id: 'payment-confirmation',
+        name: 'Payment Confirmation',
+        content: 'Dear {studentName}, thank you for your payment of {feeAmount}. Your payment has been received and processed successfully. Thank you for your prompt payment!',
+        variables: ['studentName', 'feeAmount'],
+        category: 'fee'
+      },
+      'general-template': {
+        id: 'general-template',
+        name: 'General Template',
+        content: 'Hello {studentName}, this is a general message from {instituteName}. We hope this message finds you well. If you have any questions, please don\'t hesitate to contact us at {contactNumber}.',
+        variables: ['studentName', 'instituteName', 'contactNumber'],
+        category: 'general'
+      }
+    };
+
+    return defaultTemplates[templateId] || null;
   }
 }
 

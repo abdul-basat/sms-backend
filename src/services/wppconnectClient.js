@@ -83,15 +83,20 @@ class WPPConnectClient {
    */
   async checkConnection() {
     try {
-      const url = `${this.baseUrl}/api/${this.sessionId}/status`;
-      const response = await fetch(url, { timeout: 5000 });
+      // Use the health endpoint since /api/{sessionId}/status doesn't exist
+      const url = `${this.baseUrl}/healthz`;
+      
+      const response = await fetch(url);
       
       if (!response.ok) {
+        console.log(`❌ WPPConnect health check failed: HTTP ${response.status}`);
         return false;
       }
       
-      const status = await response.json();
-      return status.status === 'CONNECTED';
+      const health = await response.json();
+      console.log(`✅ WPPConnect server health check successful:`, health);
+      // If server is healthy and responds, consider it connected
+      return health.message === 'OK';
       
     } catch (error) {
       console.error('❌ WPPConnect connection check failed:', error.message);

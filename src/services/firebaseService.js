@@ -31,21 +31,51 @@ class FirebaseService {
     try {
       console.log('📋 Fetching automation rules from Firebase...');
       
-      const rulesSnapshot = await this.db
-        .collection('automationRules')
-        .where('enabled', '==', true)
-        .get();
+      // Get all users and their automation rules
+      const usersSnapshot = await this.db.collection('users').get();
+      const allRules = [];
+      
+      for (const userDoc of usersSnapshot.docs) {
+        try {
+          // Check if user has WhatsApp automation rules
+          const automationDoc = await this.db
+            .collection('users')
+            .doc(userDoc.id)
+            .collection('whatsapp')
+            .doc('automation')
+            .get();
+          
+          if (automationDoc.exists) {
+            const automationData = automationDoc.data();
+            
+            // Handle both formats: rules array or individual rule fields
+            let userRules = [];
+            if (automationData.rules && Array.isArray(automationData.rules)) {
+              userRules = automationData.rules;
+            } else if (automationData.id) {
+              // Single rule format
+              userRules = [automationData];
+            }
+            
+            // Add user context to each rule and filter enabled ones
+            const enabledUserRules = userRules
+              .filter(rule => rule.enabled === true)
+              .map(rule => ({
+                ...rule,
+                userId: userDoc.id,
+                organizationId: userDoc.data()?.organizationId || null
+              }));
+              
+            allRules.push(...enabledUserRules);
+          }
+        } catch (error) {
+          console.warn(`⚠️ Error fetching automation rules for user ${userDoc.id}:`, error.message);
+          // Continue with other users
+        }
+      }
 
-      const rules = [];
-      rulesSnapshot.forEach(doc => {
-        rules.push({
-          id: doc.id,
-          ...doc.data()
-        });
-      });
-
-      console.log(`✅ Found ${rules.length} active automation rules`);
-      return rules;
+      console.log(`✅ Found ${allRules.length} active automation rules across all users`);
+      return allRules;
       
     } catch (error) {
       console.error('❌ Failed to fetch automation rules:', error.message);
@@ -89,6 +119,10 @@ class FirebaseService {
    */
   async getTemplate(templateId) {
     try {
+      if (!templateId) {
+        throw new Error('Template ID is required and cannot be undefined or empty');
+      }
+      
       console.log(`📝 Fetching template ${templateId} from Firebase...`);
       
       const templateDoc = await this.db
@@ -177,17 +211,57 @@ class FirebaseService {
   /**
    * Update automation rule last run time
    * @param {string} ruleId - Rule ID
+   * @param {string} userId - User ID who owns the rule
    */
-  async updateRuleLastRun(ruleId) {
+  async updateRuleLastRun(ruleId, userId) {
     try {
-      await this.db
-        .collection('automationRules')
-        .doc(ruleId)
-        .update({
-          lastRun: admin.firestore.FieldValue.serverTimestamp()
-        });
-
-      console.log(`🔄 Updated last run time for rule ${ruleId}`);
+      if (!userId) {
+        console.warn(`⚠️ Cannot update last run time for rule ${ruleId}: missing userId`);
+        return;
+      }
+      
+      // Get the current automation document
+      const automationDocRef = this.db
+        .collection('users')
+        .doc(userId)
+        .collection('whatsapp')
+        .doc('automation');
+        
+      const automationDoc = await automationDocRef.get();
+      
+      if (automationDoc.exists) {
+        const automationData = automationDoc.data();
+        
+        if (automationData.rules && Array.isArray(automationData.rules)) {
+          // Update the specific rule in the rules array
+          const updatedRules = automationData.rules.map(rule => {
+            if (rule.id === ruleId) {
+              return {
+                ...rule,
+                lastRun: admin.firestore.FieldValue.serverTimestamp()
+              };
+            }
+            return rule;
+          });
+          
+          await automationDocRef.update({
+            rules: updatedRules,
+            updatedAt: admin.firestore.FieldValue.serverTimestamp()
+          });
+          
+          console.log(`🔄 Updated last run time for rule ${ruleId} (user: ${userId})`);
+        } else if (automationData.id === ruleId) {
+          // Single rule format
+          await automationDocRef.update({
+            lastRun: admin.firestore.FieldValue.serverTimestamp(),
+            updatedAt: admin.firestore.FieldValue.serverTimestamp()
+          });
+          
+          console.log(`🔄 Updated last run time for rule ${ruleId} (user: ${userId})`);
+        }
+      } else {
+        console.warn(`⚠️ No automation document found for user ${userId}`);
+      }
       
     } catch (error) {
       console.error(`❌ Failed to update last run time for rule ${ruleId}:`, error.message);
