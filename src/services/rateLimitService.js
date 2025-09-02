@@ -1,9 +1,11 @@
 const Redis = require('redis');
+const { globalTimeConfigService } = require('./globalTimeConfigService');
 
 class RateLimitService {
   constructor() {
     this.redisUrl = process.env.REDIS_URL || 'redis://redis:6379';
     this.client = Redis.createClient({ url: this.redisUrl });
+    this.timeConfig = globalTimeConfigService;
     this.connect();
   }
 
@@ -58,23 +60,15 @@ class RateLimitService {
    */
   async checkSingleRule(rule, currentHour, currentDay) {
     try {
-      // Check business hours
+      // Check business hours using centralized configuration
       if (rule.businessHours && rule.businessHours.enabled) {
-        const { startHour, endHour, daysOfWeek } = rule.businessHours;
+        const isWithinHours = this.timeConfig.isWithinBusinessHours('rateLimiting');
         
-        // Check if current day is allowed
-        if (daysOfWeek && !daysOfWeek.includes(currentDay)) {
+        if (!isWithinHours) {
+          const businessHours = this.timeConfig.getEffectiveBusinessHours('rateLimiting');
           return {
             allowed: false,
-            reason: `Outside business days. Allowed days: ${daysOfWeek.join(', ')}`
-          };
-        }
-
-        // Check if current hour is within business hours
-        if (currentHour < startHour || currentHour >= endHour) {
-          return {
-            allowed: false,
-            reason: `Outside business hours. Allowed hours: ${startHour}:00 - ${endHour}:00`
+            reason: `Outside business hours. Allowed hours: ${businessHours.startTime} - ${businessHours.endTime}`
           };
         }
       }

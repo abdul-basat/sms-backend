@@ -63,11 +63,35 @@ class WhatsAppService {
    */
   async createSession(organizationId, config) {
     try {
+      // In development mode, create mock session if WhatsApp is not enabled
+      if (process.env.NODE_ENV === 'development' && !process.env.WHATSAPP_ENABLED) {
+        const mockSession = {
+          organizationId,
+          sessionId: `mock_${organizationId}`,
+          status: 'connected',
+          createdAt: new Date(),
+          lastActivity: new Date(),
+          phoneNumber: config.phoneNumber || '+923000000000',
+          connectionStatus: 'active',
+          isMock: true
+        };
+
+        logger.info(`[WhatsAppService] Created mock session for organization: ${organizationId}`);
+        return { success: true, session: mockSession };
+      }
+
       // Check WPPConnect server availability
       const isConnected = await this.wppClient.checkConnection();
       
       if (!isConnected) {
         logger.error(`[WhatsAppService] WPPConnect server not available for organization: ${organizationId}`);
+        
+        // In development, fallback to mock session
+        if (process.env.NODE_ENV === 'development') {
+          logger.warn(`[WhatsAppService] Falling back to mock session for organization: ${organizationId}`);
+          return await this.createMockSession(organizationId);
+        }
+        
         return { success: false, message: 'WhatsApp server not available' };
       }
 
@@ -88,6 +112,13 @@ class WhatsAppService {
 
     } catch (error) {
       logger.error(`[WhatsAppService] Failed to create session for organization ${organizationId}:`, error);
+      
+      // In development, fallback to mock session on error
+      if (process.env.NODE_ENV === 'development') {
+        logger.warn(`[WhatsAppService] Falling back to mock session due to error for organization: ${organizationId}`);
+        return await this.createMockSession(organizationId);
+      }
+      
       return { success: false, error: error.message };
     }
   }
@@ -103,9 +134,18 @@ class WhatsAppService {
     try {
       logger.info(`[WhatsAppService] Sending message for organization ${organizationId} to ${phoneNumber}`);
 
+      // Check if development mode - use mock sending
+      if (process.env.NODE_ENV === 'development' && !process.env.WHATSAPP_ENABLED) {
+        return this.mockSendMessage(organizationId, phoneNumber, message);
+      }
+
       // Ensure session is active
       const sessionResult = await this.ensureActiveSession(organizationId);
       if (!sessionResult.success) {
+        // In development, fallback to mock if session fails
+        if (process.env.NODE_ENV === 'development') {
+          return this.mockSendMessage(organizationId, phoneNumber, message);
+        }
         return sessionResult;
       }
 
@@ -131,6 +171,11 @@ class WhatsAppService {
     } catch (error) {
       logger.error(`[WhatsAppService] Failed to send message for organization ${organizationId}:`, error);
       
+      // In development, fallback to mock on error
+      if (process.env.NODE_ENV === 'development') {
+        return this.mockSendMessage(organizationId, phoneNumber, message);
+      }
+      
       // Log failed message
       await this.logMessage(organizationId, {
         phoneNumber,
@@ -145,11 +190,70 @@ class WhatsAppService {
   }
 
   /**
+   * Mock message sending for development
+   * @param {string} organizationId - Organization ID
+   * @param {string} phoneNumber - Phone number
+   * @param {string} message - Message content
+   * @returns {Promise<Object>} - Mock send result
+   */
+  async mockSendMessage(organizationId, phoneNumber, message) {
+    try {
+      // Simulate network delay
+      await new Promise(resolve => setTimeout(resolve, 500 + Math.random() * 1000));
+      
+      // Simulate 95% success rate
+      const isSuccess = Math.random() > 0.05;
+      
+      if (isSuccess) {
+        const mockMessageId = `mock_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+        
+        logger.info(`[WhatsAppService] 📱 MOCK MESSAGE TO ${phoneNumber}:`);
+        logger.info(`[WhatsAppService] 💬 "${message.substring(0, 100)}${message.length > 100 ? '...' : ''}"`);
+        
+        // Log the mock message
+        await this.logMessage(organizationId, {
+          phoneNumber,
+          message,
+          status: 'sent',
+          result: { messageId: mockMessageId, isMock: true },
+          sentAt: new Date(),
+          isMock: true
+        });
+        
+        return {
+          success: true,
+          result: {
+            messageId: mockMessageId,
+            isMock: true,
+            timestamp: new Date()
+          }
+        };
+      } else {
+        logger.error(`[WhatsAppService] Mock message failed for organization ${organizationId}`);
+        return {
+          success: false,
+          error: 'Mock network error'
+        };
+      }
+    } catch (error) {
+      return {
+        success: false,
+        error: error.message
+      };
+    }
+  }
+
+  /**
    * Ensure active session for organization
    * @param {string} organizationId - Organization ID
    * @returns {Promise<Object>} - Session status
    */
   async ensureActiveSession(organizationId) {
+    // In development mode, return mock session if WhatsApp is not enabled
+    if (process.env.NODE_ENV === 'development' && !process.env.WHATSAPP_ENABLED) {
+      return this.createMockSession(organizationId);
+    }
+
     const session = this.activeSessions.get(organizationId);
     
     if (!session) {
@@ -158,13 +262,43 @@ class WhatsAppService {
     }
 
     // Check if session is still active
-    const isConnected = await this.wppClient.checkConnection();
-    if (!isConnected) {
-      logger.warn(`[WhatsAppService] Session disconnected for organization: ${organizationId}, reconnecting...`);
-      return await this.reconnectSession(organizationId);
+    try {
+      const isConnected = await this.wppClient.checkConnection();
+      if (!isConnected) {
+        logger.warn(`[WhatsAppService] Session disconnected for organization: ${organizationId}, reconnecting...`);
+        return await this.reconnectSession(organizationId);
+      }
+    } catch (error) {
+      // If check fails in development, return mock session
+      if (process.env.NODE_ENV === 'development') {
+        logger.warn(`[WhatsAppService] Connection check failed in development, using mock session`);
+        return this.createMockSession(organizationId);
+      }
+      throw error;
     }
 
     return { success: true, session };
+  }
+
+  /**
+   * Create mock session for development
+   * @param {string} organizationId - Organization ID
+   * @returns {Promise<Object>} - Mock session
+   */
+  async createMockSession(organizationId) {
+    const mockSession = {
+      organizationId,
+      sessionId: `mock_${organizationId}`,
+      status: 'connected',
+      createdAt: new Date(),
+      lastActivity: new Date(),
+      isMock: true
+    };
+
+    this.activeSessions.set(organizationId, mockSession);
+    logger.info(`[WhatsAppService] Created mock session for organization: ${organizationId}`);
+    
+    return { success: true, session: mockSession };
   }
 
   /**

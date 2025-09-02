@@ -13,6 +13,10 @@ require('dotenv').config();
 const logger = require('./utils/logger');
 const { connectRedis } = require('./config/redis');
 const { initializeFirebase } = require('./config/firebase');
+const { globalTimeConfigService } = require('./services/globalTimeConfigService');
+
+// Import automation scheduler
+const AutomationScheduler = require('./schedulers/automationScheduler');
 
 // Import route handlers
 const organizationRoutes = require('./routes/organizations');
@@ -23,7 +27,8 @@ const paymentRoutes = require('./routes/payments'); // Phase 5
 const attendanceRoutes = require('./routes/attendance');
 const whatsappRoutes = require('./routes/whatsapp');
 const automationRoutes = require('./routes/automation');
-const communicationRoutes = require('./routes/communication'); // Phase 6
+const globalTimeConfigRoutes = require('./routes/globalTimeConfig');
+// const communicationRoutes = require('./routes/communication'); // Phase 6 - temporarily disabled
 const authRoutes = require('./routes/auth');
 
 // Import middleware
@@ -99,7 +104,7 @@ app.get('/api/health', (req, res) => {
       uptime: process.uptime(),
       checks: {
         redis: {
-          status: global.redisClient ? 'connected' : 'disconnected'
+          status: process.env.REDIS_ENABLED === 'false' ? 'disabled' : (global.redisClient ? 'connected' : 'disconnected')
         },
         firebase: {
           status: global.firebaseAdmin ? 'connected' : 'disconnected'
@@ -116,10 +121,11 @@ app.use('/api/users', userRoutes); // Let routes handle their own auth
 app.use('/api/students', studentRoutes); // Let routes handle their own auth
 app.use('/api/fees', feesRoutes); // Let routes handle their own auth
 app.use('/api/payments', paymentRoutes); // Phase 5 - Payment transactions and installments
-app.use('/api/communication', communicationRoutes); // Phase 6 - Analytics & Management
+// app.use('/api/communication', communicationRoutes); // Phase 6 - Analytics & Management - temporarily disabled
 app.use('/api/attendance', authMiddleware, attendanceRoutes);
 app.use('/api/whatsapp', authMiddleware, whatsappRoutes);
 app.use('/api/automation', authMiddleware, automationRoutes);
+app.use('/api', authMiddleware, globalTimeConfigRoutes);
 
 // 404 handler
 app.use('*', (req, res) => {
@@ -140,9 +146,25 @@ async function startServer() {
     await initializeFirebase();
     logger.info('Firebase initialized successfully');
 
-    // Initialize Redis
-    await connectRedis();
-    logger.info('Redis connected successfully');
+    // Initialize Global Time Configuration Service
+    await globalTimeConfigService.initialize();
+    logger.info('Global Time Configuration Service initialized');
+
+    // Initialize Redis (if enabled)
+    if (process.env.REDIS_ENABLED !== 'false') {
+      await connectRedis();
+      logger.info('Redis connected successfully');
+    } else {
+      logger.info('📱 Redis disabled in development, using in-memory fallbacks');
+    }
+
+    // Initialize and start automation scheduler
+    const automationScheduler = new AutomationScheduler();
+    await automationScheduler.start();
+    logger.info('🤖 Automation scheduler started successfully');
+
+    // Store scheduler globally for graceful shutdown
+    global.automationScheduler = automationScheduler;
 
     // Start HTTP server
     const server = app.listen(PORT, () => {
@@ -157,6 +179,12 @@ async function startServer() {
       
       server.close(async () => {
         logger.info('HTTP server closed');
+        
+        // Stop automation scheduler
+        if (global.automationScheduler) {
+          await global.automationScheduler.stop();
+          logger.info('Automation scheduler stopped');
+        }
         
         // Close Redis connection
         if (global.redisClient) {

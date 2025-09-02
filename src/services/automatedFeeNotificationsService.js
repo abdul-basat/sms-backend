@@ -7,7 +7,7 @@ const CoreMessagingService = require('./coreMessagingService');
 const MessageTemplateService = require('./messageTemplateService');
 const HumanBehaviorService = require('./humanBehaviorService');
 const EnhancedMessageQueueService = require('./enhancedMessageQueueService');
-const { db } = require('../config/firebase');
+const { getFirestore } = require('../config/firebase');
 const logger = require('../utils/logger');
 
 class AutomatedFeeNotificationsService {
@@ -290,6 +290,7 @@ class AutomatedFeeNotificationsService {
    */
   async getOrganizationsWithWhatsApp() {
     try {
+      const db = getFirestore();
       const snapshot = await db.collection('organizations')
         .where('whatsappConfig.enabled', '==', true)
         .where('whatsappConfig.automatedReminders', '==', true)
@@ -315,6 +316,7 @@ class AutomatedFeeNotificationsService {
    */
   async getReminderConfiguration(organizationId) {
     try {
+      const db = getFirestore();
       const orgDoc = await db.collection('organizations').doc(organizationId).get();
       
       if (!orgDoc.exists) {
@@ -421,6 +423,7 @@ class AutomatedFeeNotificationsService {
       const endOfDay = new Date(dueDate);
       endOfDay.setHours(23, 59, 59, 999);
 
+      const db = getFirestore();
       const snapshot = await db.collection(`organizationData/${organizationId}/students`)
         .where('dueDate', '>=', startOfDay)
         .where('dueDate', '<=', endOfDay)
@@ -454,6 +457,7 @@ class AutomatedFeeNotificationsService {
     try {
       const twentyFourHoursAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
 
+      const db = getFirestore();
       const snapshot = await db.collection('reminderLogs')
         .where('organizationId', '==', organizationId)
         .where('studentId', '==', studentId)
@@ -488,6 +492,7 @@ class AutomatedFeeNotificationsService {
         id: `reminder_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
       };
 
+      const db = getFirestore();
       await db.collection('reminderLogs').doc(logEntry.id).set(logEntry);
 
     } catch (error) {
@@ -514,6 +519,7 @@ class AutomatedFeeNotificationsService {
         id: `payment_confirmation_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
       };
 
+      const db = getFirestore();
       await db.collection('paymentConfirmationLogs').doc(logEntry.id).set(logEntry);
 
     } catch (error) {
@@ -529,6 +535,7 @@ class AutomatedFeeNotificationsService {
    */
   async getStudentData(organizationId, studentId) {
     try {
+      const db = getFirestore();
       const doc = await db.collection(`organizationData/${organizationId}/students`).doc(studentId).get();
       
       if (!doc.exists) {

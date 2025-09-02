@@ -369,6 +369,11 @@ async function initializeFirebase() {
 
     // Store globally for access across modules
     global.firebaseAdmin = admin;
+    global.firebaseApp = app;
+    
+    // Update the db export immediately after initialization
+    const db = admin.firestore();
+    module.exports.db = db;
     
     console.log('✅ Firebase Admin SDK initialized successfully');
     return app;
@@ -391,8 +396,44 @@ function getFirebaseAdmin() {
   return global.firebaseAdmin;
 }
 
+/**
+ * Get Firestore database instance
+ */
+function getFirestore() {
+  if (global.firebaseAdmin) {
+    return global.firebaseAdmin.firestore();
+  }
+  
+  // If Firebase failed, try mock service for development
+  if (process.env.NODE_ENV === 'development') {
+    const { createMockFirestore } = require('../services/mockFirebaseService');
+    console.log('⚠️ Using Mock Firebase Service for development');
+    return createMockFirestore();
+  }
+  
+  throw new Error('Firebase Admin not initialized. Call initializeFirebase() first.');
+}
+
+// Create database instance for backward compatibility
+let db = null;
+
 module.exports = {
   config: firebaseConfig,
   initializeFirebase,
-  getFirebaseAdmin
+  getFirebaseAdmin,
+  getFirestore,
+  get db() {
+    // Dynamic getter that returns current db instance
+    if (global.firebaseAdmin) {
+      return global.firebaseAdmin.firestore();
+    }
+    
+    // Fallback to mock service in development
+    if (process.env.NODE_ENV === 'development') {
+      const { createMockFirestore } = require('../services/mockFirebaseService');
+      return createMockFirestore();
+    }
+    
+    return null;
+  }
 };

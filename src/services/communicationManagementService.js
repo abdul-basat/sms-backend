@@ -1,19 +1,18 @@
-const { dataStore } = require('../models/dataStore');
+const { 
+  parentContacts, 
+  optOutRecords, 
+  communicationPreferences, 
+  communicationHistory 
+} = require('../models/dataStore');
 const { logger } = require('../utils/logger');
 const { v4: uuidv4 } = require('uuid');
 
 class CommunicationManagementService {
   constructor() {
-    this.parentContacts = dataStore.parentContacts || new Map();
-    this.optOuts = dataStore.optOuts || new Map();
-    this.communicationPreferences = dataStore.communicationPreferences || new Map();
-    this.communicationHistory = dataStore.communicationHistory || new Map();
-    
-    // Ensure dataStore has our collections
-    dataStore.parentContacts = this.parentContacts;
-    dataStore.optOuts = this.optOuts;
-    dataStore.communicationPreferences = this.communicationPreferences;
-    dataStore.communicationHistory = this.communicationHistory;
+    this.parentContacts = parentContacts;
+    this.optOuts = optOutRecords;
+    this.communicationPreferences = communicationPreferences;
+    this.communicationHistory = communicationHistory;
   }
 
   /**

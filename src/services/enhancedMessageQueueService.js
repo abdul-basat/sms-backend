@@ -5,6 +5,8 @@
 
 const HumanBehaviorService = require('./humanBehaviorService');
 const DuplicatePreventionService = require('./duplicatePreventionService');
+const WhatsAppService = require('./whatsappService');
+const InMemoryQueueService = require('./inMemoryQueueService');
 const Redis = require('redis');
 const { v4: uuidv4 } = require('uuid');
 const logger = require('../utils/logger');
@@ -12,29 +14,115 @@ const logger = require('../utils/logger');
 class EnhancedMessageQueueService {
   constructor() {
     this.humanBehavior = new HumanBehaviorService();
-    this.redisUrl = process.env.REDIS_URL || 'redis://redis:6379';
-    this.client = Redis.createClient({ url: this.redisUrl });
-    this.duplicatePrevention = new DuplicatePreventionService(this.client);
+    this.whatsappService = new WhatsAppService();
+    this.redisUrl = process.env.REDIS_URL || 'redis://localhost:6379';
+    this.client = null;
+    this.duplicatePrevention = null;
     this.processingQueues = new Map(); // organizationId -> processing status
     this.messageHistory = new Map(); // organizationId -> recent message timestamps
     this.isConnected = false;
+    this.isInMemory = false;
     
     this.connect();
   }
 
   /**
-   * Connect to Redis
+   * Connect to Redis with fallback to in-memory
    */
   async connect() {
     try {
-      await this.client.connect();
+      // Check if Redis should be used
+      if (process.env.NODE_ENV === 'development' && !process.env.REDIS_ENABLED) {
+        logger.info('📱 Redis disabled in development, using in-memory queue');
+        return this.fallbackToInMemory();
+      }
+
+      // Try Redis first with timeout
+      this.client = Redis.createClient({ 
+        url: this.redisUrl,
+        socket: {
+          connectTimeout: 5000,
+          commandTimeout: 5000
+        }
+      });
+      
+      // Set up error handler to prevent spam
+      this.client.on('error', (err) => {
+        if (!this.isInMemory) {
+          logger.error('❌ Redis Client Error:', err.message);
+          // Fallback to in-memory on persistent errors
+          this.fallbackToInMemory();
+        }
+      });
+
+      // Set connection timeout
+      const connectPromise = this.client.connect();
+      const timeoutPromise = new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('Redis connection timeout')), 3000)
+      );
+
+      await Promise.race([connectPromise, timeoutPromise]);
+      
+      this.duplicatePrevention = new DuplicatePreventionService(this.client);
       this.isConnected = true;
-      logger.info('🔗 Enhanced Message Queue Service connected to Redis');
+      this.isInMemory = false;
+      
+      logger.info('✅ Enhanced Message Queue connected to Redis successfully');
       
       // Initialize cleanup job
       this.startCleanupJob();
+      
     } catch (error) {
-      logger.error('❌ Failed to connect Enhanced Message Queue to Redis:', error.message);
+      logger.warn(`⚠️ Failed to connect to Redis: ${error.message}`);
+      logger.info('🔄 Falling back to in-memory queue service...');
+      
+      // Fallback to in-memory service
+      this.client = new InMemoryQueueService();
+      await this.client.connect();
+      
+      this.duplicatePrevention = { 
+        checkDuplicate: async () => false,
+        markProcessed: async () => true 
+      }; // Mock duplicate prevention
+      
+      this.isConnected = true;
+      this.isInMemory = true;
+      
+      logger.info('✅ Enhanced Message Queue using in-memory fallback');
+    }
+  }
+
+  /**
+   * Fallback to in-memory queue service
+   */
+  async fallbackToInMemory() {
+    try {
+      // Clean up existing Redis client if it exists
+      if (this.client && typeof this.client.disconnect === 'function') {
+        try {
+          await this.client.disconnect();
+        } catch (err) {
+          // Ignore disconnect errors
+        }
+      }
+
+      // Switch to in-memory service
+      this.client = new InMemoryQueueService();
+      await this.client.connect();
+      
+      this.duplicatePrevention = { 
+        checkDuplicate: async () => false,
+        markProcessed: async () => true 
+      }; // Mock duplicate prevention
+      
+      this.isConnected = true;
+      this.isInMemory = true;
+      
+      logger.info('✅ Enhanced Message Queue using in-memory fallback');
+      
+    } catch (error) {
+      logger.error('❌ Failed to initialize in-memory fallback:', error);
+      throw error;
     }
   }
 
@@ -285,11 +373,21 @@ class EnhancedMessageQueueService {
           if (!isBusinessHours) {
             logger.info(`[EnhancedMessageQueueService] Outside business hours, postponing message ${message.id}`);
             
-            // Re-queue for later processing
-            await this.client.lPush(queueKey, rawMessage);
+            // Calculate next business hours time
+            const nextBusinessTime = this.calculateNextBusinessTime(
+              message.behaviorConfig.timezone,
+              message.behaviorConfig.businessHours
+            );
             
-            // Wait and check again in 30 minutes
-            await this.delay(30 * 60 * 1000);
+            // Set retry timestamp
+            message.retryAfter = nextBusinessTime;
+            message.status = 'postponed';
+            
+            // Re-queue for later processing with delay
+            await this.client.lPush(queueKey, JSON.stringify(message));
+            
+            // Wait before checking next message (don't process immediately)
+            await this.delay(60 * 1000); // Wait 1 minute before checking again
             continue;
           }
 
@@ -367,31 +465,45 @@ class EnhancedMessageQueueService {
   }
 
   /**
-   * Send message through WhatsApp service (placeholder)
+   * Send message through WhatsApp service
    * @param {Object} message - Message object
    * @returns {Promise<Object>} - Send result
    */
   async sendMessage(message) {
     try {
-      // This would integrate with the actual WhatsApp service
-      // For now, return a mock success
-      
       logger.debug(`[EnhancedMessageQueueService] Sending message to ${message.phoneNumber}: ${message.content.substring(0, 50)}...`);
       
-      // Simulate network delay
-      await this.delay(500 + Math.random() * 1000);
+      // Extract organization ID from message metadata
+      const organizationId = message.organizationId || 'default';
       
-      // Mock success/failure (90% success rate)
-      const isSuccess = Math.random() > 0.1;
+      // Use WhatsApp service to send message
+      const result = await this.whatsappService.sendMessage(organizationId, {
+        recipientId: message.recipientId,
+        phoneNumber: message.phoneNumber,
+        content: message.content,
+        templateId: message.templateId,
+        variables: message.variables,
+        type: message.type || 'text'
+      });
       
-      return {
-        success: isSuccess,
-        messageId: message.id,
-        timestamp: new Date(),
-        error: isSuccess ? null : 'Mock network error'
-      };
+      if (result.success) {
+        logger.info(`[EnhancedMessageQueueService] Message ${message.id} sent successfully to ${message.phoneNumber}`);
+        return {
+          success: true,
+          messageId: result.messageId || message.id,
+          timestamp: new Date(),
+          whatsappMessageId: result.whatsappMessageId
+        };
+      } else {
+        logger.error(`[EnhancedMessageQueueService] Failed to send message ${message.id}: ${result.error}`);
+        return {
+          success: false,
+          error: result.error || 'Unknown WhatsApp service error'
+        };
+      }
 
     } catch (error) {
+      logger.error(`[EnhancedMessageQueueService] Error sending message ${message.id}:`, error);
       return {
         success: false,
         error: error.message
@@ -768,6 +880,70 @@ class EnhancedMessageQueueService {
     const estimatedMs = queueLength * averageProcessingTime;
     
     return new Date(Date.now() + estimatedMs);
+  }
+
+  /**
+   * Calculate next business time based on timezone and business hours
+   * @param {string} timezone - Organization timezone
+   * @param {Object} businessHours - Business hours configuration
+   * @returns {number} - Timestamp for next business time
+   */
+  calculateNextBusinessTime(timezone, businessHours) {
+    try {
+      const now = new Date();
+      const userTime = new Date(now.toLocaleString("en-US", { timeZone: timezone }));
+      
+      const currentDay = userTime.getDay(); // 0 = Sunday
+      const currentHour = userTime.getHours();
+      const currentMinute = userTime.getMinutes();
+      
+      // Convert business hours to minutes
+      const startTimeMinutes = this.timeToMinutes(businessHours.startTime);
+      const endTimeMinutes = this.timeToMinutes(businessHours.endTime);
+      const currentTimeMinutes = currentHour * 60 + currentMinute;
+      
+      // Check if today is a business day
+      const isBusinessDay = businessHours.daysOfWeek?.includes(currentDay);
+      
+      if (isBusinessDay && currentTimeMinutes < startTimeMinutes) {
+        // Same day, before business hours start
+        const nextTime = new Date(userTime);
+        nextTime.setHours(Math.floor(startTimeMinutes / 60), startTimeMinutes % 60, 0, 0);
+        return nextTime.getTime();
+      }
+      
+      // Find next business day
+      for (let i = 1; i <= 7; i++) {
+        const nextDay = new Date(userTime);
+        nextDay.setDate(userTime.getDate() + i);
+        nextDay.setHours(Math.floor(startTimeMinutes / 60), startTimeMinutes % 60, 0, 0);
+        
+        if (businessHours.daysOfWeek?.includes(nextDay.getDay())) {
+          return nextDay.getTime();
+        }
+      }
+      
+      // Fallback: tomorrow at business hours start
+      const tomorrow = new Date(userTime);
+      tomorrow.setDate(userTime.getDate() + 1);
+      tomorrow.setHours(Math.floor(startTimeMinutes / 60), startTimeMinutes % 60, 0, 0);
+      return tomorrow.getTime();
+      
+    } catch (error) {
+      logger.error('[EnhancedMessageQueueService] Error calculating next business time:', error);
+      // Fallback: 1 hour from now
+      return Date.now() + (60 * 60 * 1000);
+    }
+  }
+
+  /**
+   * Convert time string (HH:MM) to minutes
+   * @param {string} timeString - Time in HH:MM format
+   * @returns {number} - Time in minutes
+   */
+  timeToMinutes(timeString) {
+    const [hours, minutes] = timeString.split(':').map(Number);
+    return hours * 60 + minutes;
   }
 
   /**

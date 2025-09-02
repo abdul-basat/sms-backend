@@ -1,17 +1,16 @@
-const { dataStore } = require('../models/dataStore');
+const { 
+  analytics, 
+  communicationLogs, 
+  communicationSettings 
+} = require('../models/dataStore');
 const { logger } = require('../utils/logger');
 const { v4: uuidv4 } = require('uuid');
 
 class CommunicationAnalyticsService {
   constructor() {
-    this.analytics = dataStore.analytics || new Map();
-    this.communicationLogs = dataStore.communicationLogs || new Map();
-    this.communicationSettings = dataStore.communicationSettings || new Map();
-    
-    // Ensure dataStore has our collections
-    dataStore.analytics = this.analytics;
-    dataStore.communicationLogs = this.communicationLogs;
-    dataStore.communicationSettings = this.communicationSettings;
+    this.analytics = analytics;
+    this.communicationLogs = communicationLogs;
+    this.communicationSettings = communicationSettings;
   }
 
   /**

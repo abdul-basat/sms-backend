@@ -2,6 +2,7 @@ const WPPConnectClient = require('./wppconnectClient');
 const FirebaseService = require('./firebaseService');
 const QueueService = require('./queueService');
 const RateLimitService = require('./rateLimitService');
+const { globalTimeConfigService } = require('./globalTimeConfigService');
 
 class AutomationService {
   constructor() {
@@ -9,6 +10,7 @@ class AutomationService {
     this.firebaseService = new FirebaseService();
     this.queueService = new QueueService();
     this.rateLimitService = new RateLimitService();
+    this.timeConfig = globalTimeConfigService;
     this.isRunning = false;
     this.lastRulesCheck = null;
   }
@@ -25,16 +27,24 @@ class AutomationService {
     console.log('🚀 Starting automation service...');
 
     try {
-      // Check WPPConnect connection
-      const isConnected = await this.wppconnectClient.checkConnection();
-      if (!isConnected) {
-        throw new Error('WPPConnect server is not connected');
+      // Check WhatsApp connection (if enabled)
+      if (process.env.WHATSAPP_ENABLED !== 'false') {
+        const isConnected = await this.wppconnectClient.checkConnection();
+        if (!isConnected) {
+          throw new Error('WPPConnect server is not connected');
+        }
+      } else {
+        console.log('📱 WhatsApp services disabled in development mode');
       }
 
-      // Check Firebase connection
-      const firebaseHealth = await this.firebaseService.healthCheck();
-      if (!firebaseHealth.connected) {
-        throw new Error('Firebase connection failed');
+      // Check Firebase connection (if enabled)
+      if (process.env.FIREBASE_ENABLED !== 'false') {
+        const firebaseHealth = await this.firebaseService.healthCheck();
+        if (!firebaseHealth.connected) {
+          throw new Error('Firebase connection failed');
+        }
+      } else {
+        console.log('🔥 Firebase services disabled in development mode');
       }
 
       this.isRunning = true;
@@ -139,13 +149,14 @@ class AutomationService {
       return this.checkFrequency(rule, now);
     }
     
-    // Grace period: allow execution within 2 minutes of scheduled time
+    // Grace period: use centralized configuration
     const currentMinutes = now.getHours() * 60 + now.getMinutes();
     const [ruleHour, ruleMinute] = ruleTime.split(':').map(Number);
     const ruleMinutes = ruleHour * 60 + ruleMinute;
     
     const timeDifference = Math.abs(currentMinutes - ruleMinutes);
-    const gracePeriodMinutes = 2; // Allow 2-minute grace period
+    const config = this.timeConfig.getConfig();
+    const gracePeriodMinutes = config.automationRules.gracePeriodMinutes;
     
     if (timeDifference <= gracePeriodMinutes) {
       console.log(`⏰ Rule ${rule.id} triggered within grace period (${timeDifference} min difference)`);

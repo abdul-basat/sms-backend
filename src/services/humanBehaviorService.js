@@ -1,12 +1,15 @@
 /**
  * Human Behavior Simulation Service
  * Implements sophisticated anti-detection algorithms for WhatsApp messaging
+ * Now uses centralized time configuration
  */
 
 const logger = require('../utils/logger');
+const { globalTimeConfigService } = require('./globalTimeConfigService');
 
 class HumanBehaviorService {
   constructor() {
+    this.timeConfig = globalTimeConfigService;
     this.activityPatterns = {
       conservative: { min: 8, max: 20, baseDelay: 15 },
       moderate: { min: 5, max: 15, baseDelay: 10 },
@@ -181,41 +184,14 @@ class HumanBehaviorService {
   }
 
   /**
-   * Generate business hours with timezone awareness
-   * @param {string} timezone - User's timezone (e.g., 'Asia/Karachi')
-   * @param {Object} businessHours - Business hours configuration
+   * Check if current time is within business hours using centralized configuration
+   * @param {string} timezone - User's timezone (deprecated, now uses global config)
+   * @param {Object} businessHours - Business hours configuration (deprecated, now uses global config)
    * @returns {boolean} - Whether current time is within business hours
    */
   isWithinBusinessHours(timezone, businessHours) {
-    try {
-      const now = new Date();
-      const userTime = new Date(now.toLocaleString("en-US", { timeZone: timezone }));
-      
-      const currentHour = userTime.getHours();
-      const currentMinute = userTime.getMinutes();
-      const currentDay = userTime.getDay(); // 0 = Sunday
-      
-      // Check if current day is allowed
-      if (businessHours.daysOfWeek && !businessHours.daysOfWeek.includes(currentDay)) {
-        return false;
-      }
-      
-      // Convert time to minutes for easier comparison
-      const currentTimeMinutes = currentHour * 60 + currentMinute;
-      const startTimeMinutes = this.timeToMinutes(businessHours.startTime);
-      const endTimeMinutes = this.timeToMinutes(businessHours.endTime);
-      
-      // Handle overnight business hours (e.g., 22:00 to 06:00)
-      if (startTimeMinutes > endTimeMinutes) {
-        return currentTimeMinutes >= startTimeMinutes || currentTimeMinutes <= endTimeMinutes;
-      } else {
-        return currentTimeMinutes >= startTimeMinutes && currentTimeMinutes <= endTimeMinutes;
-      }
-      
-    } catch (error) {
-      logger.error('[HumanBehaviorService] Error checking business hours:', error);
-      return true; // Default to allowing messages if error
-    }
+    // Use centralized time configuration instead of parameters
+    return this.timeConfig.isWithinBusinessHours('humanBehavior');
   }
 
   /**
