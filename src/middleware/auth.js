@@ -12,6 +12,12 @@ const getAuthService = () => {
   return getAuth();
 };
 
+// Helper function to get Firestore
+const getDb = () => {
+  const { getFirestore } = require('firebase-admin/firestore');
+  return getFirestore();
+};
+
 /**
  * Verify Firebase ID token and extract user information
  */
@@ -31,29 +37,39 @@ const verifyFirebaseToken = async (req, res, next) => {
     // Verify the Firebase ID token
     const decodedToken = await getAuthService().verifyIdToken(idToken);
     
-    // Add user information to request
-    req.user = {
-      uid: decodedToken.uid,
-      email: decodedToken.email,
-      emailVerified: decodedToken.email_verified,
-      name: decodedToken.name,
-      picture: decodedToken.picture,
-    };
-
-    // Extract custom claims for organization info
-    if (decodedToken.organizationId) {
-      req.user.organizationId = decodedToken.organizationId;
+    // Fetch user data from Firestore to get complete profile including role and organizationId
+    const db = getDb();
+    const userDoc = await db.collection('users').doc(decodedToken.uid).get();
+    
+    let userData = {};
+    if (userDoc.exists) {
+      userData = userDoc.data();
     }
     
-    if (decodedToken.role) {
-      req.user.role = decodedToken.role;
-    }
+    // Add user information to request (combine token data with Firestore data)
+    req.user = {
+      uid: decodedToken.uid,
+      id: decodedToken.uid, // For compatibility with JWT middleware
+      email: decodedToken.email || userData.email,
+      emailVerified: decodedToken.email_verified || userData.isEmailVerified || false,
+      name: decodedToken.name || userData.displayName,
+      displayName: userData.displayName || decodedToken.name,
+      picture: decodedToken.picture || userData.photoURL,
+      
+      // Get role and organization from Firestore (more reliable than custom claims)
+      role: userData.role || decodedToken.role || 'user',
+      organizationId: userData.organizationId || decodedToken.organizationId,
+      permissions: userData.permissions || decodedToken.permissions || [],
+      
+      // Additional user info from Firestore
+      instituteName: userData.instituteName,
+      mobileNumber: userData.mobileNumber,
+      assignedClasses: userData.assignedClasses || [],
+      assignedModules: userData.assignedModules || [],
+      status: userData.status || 'active'
+    };
 
-    if (decodedToken.permissions) {
-      req.user.permissions = decodedToken.permissions;
-    }
-
-    logger.debug(`User authenticated: ${req.user.email} (${req.user.uid})`);
+    logger.debug(`User authenticated: ${req.user.email} (${req.user.uid}) - Role: ${req.user.role}, Org: ${req.user.organizationId}`);
     next();
 
   } catch (error) {
@@ -184,15 +200,26 @@ const optionalAuth = async (req, res, next) => {
       const idToken = authHeader.split('Bearer ')[1];
       const decodedToken = await getAuthService().verifyIdToken(idToken);
       
+      // Fetch user data from Firestore
+      const db = getDb();
+      const userDoc = await db.collection('users').doc(decodedToken.uid).get();
+      
+      let userData = {};
+      if (userDoc.exists) {
+        userData = userDoc.data();
+      }
+      
       req.user = {
         uid: decodedToken.uid,
-        email: decodedToken.email,
-        emailVerified: decodedToken.email_verified,
-        name: decodedToken.name,
-        picture: decodedToken.picture,
-        organizationId: decodedToken.organizationId,
-        role: decodedToken.role,
-        permissions: decodedToken.permissions || [],
+        id: decodedToken.uid,
+        email: decodedToken.email || userData.email,
+        emailVerified: decodedToken.email_verified || userData.isEmailVerified || false,
+        name: decodedToken.name || userData.displayName,
+        displayName: userData.displayName || decodedToken.name,
+        picture: decodedToken.picture || userData.photoURL,
+        role: userData.role || decodedToken.role || 'user',
+        organizationId: userData.organizationId || decodedToken.organizationId,
+        permissions: userData.permissions || decodedToken.permissions || [],
       };
     }
     
