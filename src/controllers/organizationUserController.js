@@ -263,10 +263,27 @@ const createOrganizationUser = async (req, res) => {
       lastLoginAt: null
     };
 
-    // Save user data to Firestore
-    await db.collection('users').doc(firebaseUser.uid).set(userDocData);
+    // Save user data to Firestore in BOTH collections for compatibility
+    // Legacy apps expect 'users' collection, newer code expects 'userProfiles'
+    await Promise.all([
+      db.collection('users').doc(firebaseUser.uid).set(userDocData),
+      db.collection('userProfiles').doc(firebaseUser.uid).set({
+        uid: userDocData.uid,
+        organizationId: userDocData.organizationId,
+        role: userDocData.role,
+        parentUserId: userDocData.parentUserId,
+        permissions: userDocData.permissions,
+        assignedClasses: userDocData.assignedClasses,
+        assignedModules: userDocData.assignedModules,
+        status: userDocData.status,
+        createdAt: userDocData.createdAt,
+        updatedAt: userDocData.updatedAt,
+        email: userDocData.email,
+        displayName: userDocData.displayName
+      })
+    ]);
 
-    logger.info(`User document created in Firestore: ${firebaseUser.uid}`);
+    logger.info(`User document created in both 'users' and 'userProfiles' collections: ${firebaseUser.uid}`);
 
     // Send email verification (optional)
     try {

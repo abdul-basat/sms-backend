@@ -28,7 +28,7 @@ const generateFeeId = () => {
 // Helper function to check if user can access fee data
 const canAccessFee = (requestingUser, fee) => {
   // Admin can access any fee
-  if (requestingUser.role === 'app_admin' || requestingUser.role === 'admin') {
+  if (requestingUser.role === 'app_admin' || requestingUser.role === 'app_admin') {
     return true;
   }
   
@@ -42,7 +42,7 @@ const canAccessFee = (requestingUser, fee) => {
 
 // Helper function to check if user can manage fees
 const canManageFees = (user) => {
-  return user.role === 'app_admin' || user.role === 'admin' || user.role === 'school_admin';
+  return user.role === 'app_admin' || user.role === 'app_admin' || user.role === 'school_admin';
 };
 
 // Helper function to validate month format (YYYY-MM)
@@ -74,7 +74,7 @@ const getFees = async (req, res) => {
 
     // Get fees based on user permissions
     let allFees = [];
-    if (requestingUser.role === 'app_admin' || requestingUser.role === 'admin') {
+    if (requestingUser.role === 'app_admin' || requestingUser.role === 'app_admin') {
       allFees = getAllFees();
     } else if (requestingUser.organizationId) {
       allFees = getFeesByOrganization(requestingUser.organizationId);
@@ -254,7 +254,7 @@ const createFee = async (req, res) => {
     }
 
     // For non-admin users, ensure student is in their organization
-    if (requestingUser.role !== 'app_admin' && requestingUser.role !== 'admin') {
+    if (requestingUser.role !== 'app_admin' && requestingUser.role !== 'app_admin') {
       if (student.organizationId !== requestingUser.organizationId) {
         throw new AppError('Cannot create fee for student in different organization', 403);
       }

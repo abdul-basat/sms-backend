@@ -10,7 +10,7 @@ async function testUserCreation() {
     password: 'password123',
     firstName: 'Test',
     lastName: 'User',
-    role: 'user'
+  role: 'school_admin'
   };
 
   console.log('1. Creating user for organization setup...');

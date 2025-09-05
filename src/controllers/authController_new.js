@@ -42,7 +42,7 @@ const generateToken = (user) => {
  * Register a new user
  */
 const register = async (req, res) => {
-  const { email, password, firstName, lastName, role = 'user', organizationId } = req.body;
+  const { email, password, firstName, lastName, role = 'school_admin', organizationId } = req.body;
 
   try {
     // Check if user already exists
@@ -204,7 +204,7 @@ const verifyToken = async (req, res) => {
       photoURL: decodedToken.picture || userData.photoURL,
       phoneNumber: decodedToken.phone_number || userData.phoneNumber,
       organizationId: decodedToken.organizationId || userData.organizationId,
-      role: decodedToken.role || userData.role || 'user',
+  role: decodedToken.role || userData.role || 'school_admin',
       permissions: decodedToken.permissions || userData.permissions || [],
       lastLoginAt: new Date().toISOString(),
     };

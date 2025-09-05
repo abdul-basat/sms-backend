@@ -22,7 +22,7 @@ router.post('/register',
     body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters'),
     body('firstName').notEmpty().withMessage('First name is required'),
     body('lastName').notEmpty().withMessage('Last name is required'),
-    body('role').optional().isIn(['admin', 'teacher', 'user']).withMessage('Invalid role'),
+  body('role').optional().isIn(['app_admin', 'teacher']).withMessage('Invalid role'),
     validationMiddleware,
   ],
   asyncHandler(authController.register)

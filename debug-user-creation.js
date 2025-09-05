@@ -11,7 +11,7 @@ async function debugUserCreation() {
       password: 'password123',
       firstName: 'Test',
       lastName: 'User',
-      role: 'user',
+  role: 'school_admin',
       organizationId: '123e4567-e89b-12d3-a456-426614174000' // Valid UUID format
     };
     

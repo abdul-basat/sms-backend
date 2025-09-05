@@ -10,7 +10,7 @@ async function testFeeCreation() {
     password: 'password123',
     firstName: 'Test',
     lastName: 'User',
-    role: 'user'
+  role: 'school_admin'
   };
 
   const userResponse = await request(app)

@@ -24,7 +24,7 @@ const generateStudentId = () => {
 // Helper function to check if user can access student data
 const canAccessStudent = (requestingUser, student) => {
   // Admin can access any student
-  if (requestingUser.role === 'app_admin' || requestingUser.role === 'admin') {
+  if (requestingUser.role === 'app_admin' || requestingUser.role === 'app_admin') {
     return true;
   }
   
@@ -38,7 +38,7 @@ const canAccessStudent = (requestingUser, student) => {
 
 // Helper function to check if user is admin
 const isAdmin = (user) => {
-  return user.role === 'app_admin' || user.role === 'admin';
+  return user.role === 'app_admin' || user.role === 'app_admin';
 };
 
 /**

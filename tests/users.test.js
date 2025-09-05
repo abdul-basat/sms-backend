@@ -31,7 +31,8 @@ describe('Users API', () => {
     // Create regular user
     const userData = global.testHelpers.generateTestUser();
     userData.organizationId = testOrganization.id;
-    userData.role = 'user';
+  // Updated default role to 'school_admin' (legacy 'user' removed)
+  userData.role = 'school_admin';
     
     const { user, token: userAuthToken } = await testHelpers.createTestUser(userData, testOrganization.id);
     userToken = userAuthToken;

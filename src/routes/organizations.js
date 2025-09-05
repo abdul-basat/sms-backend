@@ -172,7 +172,7 @@ router.post('/:id/users/invite',
     param('id').isUUID().withMessage('Invalid organization ID'),
     body('email').isEmail().withMessage('Valid email is required'),
     body('role')
-      .isIn(['school_admin', 'teacher', 'clerk', 'user'])
+      .isIn(['school_admin', 'teacher', 'clerk'])
       .withMessage('Invalid role'),
     validationMiddleware,
   ],
@@ -191,7 +191,7 @@ router.put('/:id/users/:userId/role',
     param('id').isUUID().withMessage('Invalid organization ID'),
     param('userId').isString().withMessage('Valid user ID is required'),
     body('role')
-      .isIn(['school_admin', 'teacher', 'clerk', 'user'])
+      .isIn(['school_admin', 'teacher', 'clerk'])
       .withMessage('Invalid role'),
     validationMiddleware,
   ],

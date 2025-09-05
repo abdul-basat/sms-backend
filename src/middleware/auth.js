@@ -57,7 +57,7 @@ const verifyFirebaseToken = async (req, res, next) => {
       picture: decodedToken.picture || userData.photoURL,
       
       // Get role and organization from Firestore (more reliable than custom claims)
-      role: userData.role || decodedToken.role || 'user',
+  role: userData.role || decodedToken.role || 'school_admin',
       organizationId: userData.organizationId || decodedToken.organizationId,
       permissions: userData.permissions || decodedToken.permissions || [],
       
@@ -217,7 +217,7 @@ const optionalAuth = async (req, res, next) => {
         name: decodedToken.name || userData.displayName,
         displayName: userData.displayName || decodedToken.name,
         picture: decodedToken.picture || userData.photoURL,
-        role: userData.role || decodedToken.role || 'user',
+  role: userData.role || decodedToken.role || 'school_admin',
         organizationId: userData.organizationId || decodedToken.organizationId,
         permissions: userData.permissions || decodedToken.permissions || [],
       };

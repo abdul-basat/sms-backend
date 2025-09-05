@@ -42,7 +42,7 @@ const generateInstallmentPlanId = () => {
 // Helper function to check if user can access payment data
 const canAccessPaymentData = (requestingUser, organizationId) => {
   // Admin can access any payment data
-  if (requestingUser.role === 'app_admin' || requestingUser.role === 'admin') {
+  if (requestingUser.role === 'app_admin' || requestingUser.role === 'app_admin') {
     return true;
   }
   
@@ -56,7 +56,7 @@ const canAccessPaymentData = (requestingUser, organizationId) => {
 
 // Helper function to check if user can manage payments
 const canManagePayments = (user) => {
-  return ['app_admin', 'admin', 'school_admin', 'clerk'].includes(user.role);
+  return ['app_admin', 'app_admin', 'school_admin', 'clerk'].includes(user.role);
 };
 
 // Helper function to validate payment method

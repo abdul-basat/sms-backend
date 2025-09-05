@@ -15,7 +15,7 @@ const generateUserId = () => {
 // Helper function to check if user can access another user's data
 const canAccessUser = (requestingUser, targetUserId) => {
   // Admin can access any user (both 'admin' and 'app_admin' roles)
-  if (requestingUser.role === 'app_admin' || requestingUser.role === 'admin') {
+  if (requestingUser.role === 'app_admin' || requestingUser.role === 'app_admin') {
     return true;
   }
   
@@ -35,7 +35,7 @@ const canAccessUser = (requestingUser, targetUserId) => {
 
 // Helper function to check if user is admin
 const isAdmin = (user) => {
-  return user.role === 'app_admin' || user.role === 'admin';
+  return user.role === 'app_admin' || user.role === 'app_admin';
 };
 
 // Helper function to filter sensitive fields based on user role
